@@ -11,7 +11,7 @@ const navLinks = [
 
 export function Header() {
   return (
-    <header className="w-full">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex items-center justify-center h-16 px-4 sm:px-6 lg:px-8">
         <nav>
           <ul className="flex flex-wrap items-center justify-center space-x-4 sm:space-x-8">
