@@ -12,7 +12,7 @@ export function Header() {
     <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-sm">
       <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="font-bold text-lg tracking-tight">
-          Nikita Pugachev
+          Abhijeet Kala
         </Link>
         <nav>
           <ul className="flex items-center space-x-6">

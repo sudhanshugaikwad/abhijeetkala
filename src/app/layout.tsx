@@ -5,8 +5,8 @@ import { Header } from '@/components/layout/header';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Nikita Clone',
-  description: 'A clone of nikitapugachev.com',
+  title: 'Abhijeet Kala',
+  description: 'Portfolio of Abhijeet Kala',
 };
 
 export default function RootLayout({
