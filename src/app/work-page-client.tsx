@@ -6,11 +6,11 @@ import { Button } from '@/components/ui/button';
 import { useRef, useState } from 'react';
 
 export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
-  const [visibleItems, setVisibleItems] = useState(10);
+  const [visibleItems, setVisibleItems] = useState(3);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const showMoreItems = () => {
-    setVisibleItems((prev) => prev + 5);
+    setVisibleItems((prev) => prev + 3);
   };
 
   const handleMouseEnter = (index: number) => {
@@ -26,30 +26,33 @@ export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
   };
 
   return (
-    <div className="container mx-auto">
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 p-4">
+    <div className="max-w-3xl mx-auto">
+        <div className="space-y-12">
             {items.slice(0, visibleItems).map((item, index) => (
-            <Link key={item.id} href={`/work/${item.id}`} className="break-inside-avoid block group">
-                <div 
-                  className="relative aspect-auto overflow-hidden rounded-lg border border-neutral-700/60 hover:border-neutral-500 transition-colors duration-300"
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={() => handleMouseLeave(index)}
-                >
-                  <video
-                      ref={el => videoRefs.current[index] = el}
-                      src={item.videoUrl}
-                      muted
-                      loop
-                      playsInline
-                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/20" />
-                </div>
-            </Link>
+              <div key={item.id} className="group">
+                  <h2 className="text-lg font-medium mb-4">{item.title}</h2>
+                  <Link href={`/work/${item.id}`} className="break-inside-avoid block">
+                      <div 
+                        className="relative aspect-video overflow-hidden rounded-lg border border-neutral-700/60 hover:border-neutral-500 transition-colors duration-300"
+                        onMouseEnter={() => handleMouseEnter(index)}
+                        onMouseLeave={() => handleMouseLeave(index)}
+                      >
+                        <video
+                            ref={el => videoRefs.current[index] = el}
+                            src={item.videoUrl}
+                            muted
+                            loop
+                            playsInline
+                            className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-black/20" />
+                      </div>
+                  </Link>
+              </div>
             ))}
         </div>
         {visibleItems < items.length && (
-            <div className="mt-8 text-center">
+            <div className="mt-12 text-center">
             <Button variant="link" className="text-neutral-400 hover:text-white" onClick={showMoreItems}>
                 See more
             </Button>
