@@ -1,9 +1,18 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { useSearchParams } from 'next/navigation';
 
 export default function WorkPage() {
-  const images = PlaceHolderImages.filter(img => img.id.startsWith('work-'));
+  const searchParams = useSearchParams();
+  const category = searchParams.get('category');
+
+  const images = PlaceHolderImages.filter(img => {
+    if (!category || category === 'all') return img.id.startsWith('work-');
+    return img.category.toLowerCase() === category.toLowerCase() && img.id.startsWith('work-');
+  });
 
   return (
     <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
@@ -25,6 +34,8 @@ export default function WorkPage() {
                   data-ai-hint={image.imageHint}
                   className="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-80"
                 />
+                 <figcaption className="text-sm mt-2">{image.title}</figcaption>
+                 <figcaption className="text-xs text-muted-foreground">{image.client}</figcaption>
               </figure>
             </Link>
           </div>

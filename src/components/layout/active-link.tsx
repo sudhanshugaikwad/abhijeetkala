@@ -1,22 +1,30 @@
 "use client";
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import type { ComponentProps } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 
-type ActiveLinkProps = ComponentProps<typeof Link> & {
+type ActiveLinkProps = Omit<ComponentProps<typeof Link>, 'href'> & {
+  href: string;
+  children: ReactNode;
   activeClassName?: string;
+  className?: string;
+  category?: string;
 };
 
-export function ActiveLink({ href, className, activeClassName, children, ...props }: ActiveLinkProps) {
+export function ActiveLink({ href, children, activeClassName, className, category, ...props }: ActiveLinkProps) {
   const pathname = usePathname();
-  // Handle root path matching
-  const isActive = href === '/' ? pathname === href : pathname.startsWith(href.toString());
+  const searchParams = useSearchParams();
+  const currentCategory = searchParams.get('category');
+
+  const isActive = pathname === href && (category ? currentCategory === category : !currentCategory || currentCategory === 'all');
+  
+  const linkHref = category ? `${href}?category=${category}` : href;
 
   return (
     <Link
-      href={href}
+      href={linkHref}
       className={cn(className, isActive && activeClassName)}
       {...props}
     >

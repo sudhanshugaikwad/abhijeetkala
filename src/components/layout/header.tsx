@@ -1,27 +1,26 @@
-import Link from 'next/link';
 import { ActiveLink } from './active-link';
 
 const navLinks = [
-  { href: '/', label: 'Work' },
-  { href: '/journal', label: 'Journal' },
-  { href: '/info', label: 'Info' },
+  { href: '/', label: 'All', category: 'all' },
+  { href: '/', label: 'AI', category: 'ai' },
+  { href: '/', label: 'Advertising', category: 'advertising' },
+  { href: '/', label: 'Creative', category: 'creative' },
+  { href: '/', label: 'Food', category: 'food' },
 ];
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-sm">
-      <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="font-bold text-lg tracking-tight">
-          Abhijeet Kala
-        </Link>
+    <header className="w-full">
+      <div className="flex items-center justify-center h-16 px-4 sm:px-6 lg:px-8">
         <nav>
-          <ul className="flex items-center space-x-6">
+          <ul className="flex items-center space-x-8">
             {navLinks.map((link) => (
-              <li key={link.href}>
+              <li key={link.label}>
                 <ActiveLink
                   href={link.href}
+                  category={link.category}
                   className="text-sm uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground pb-1"
-                  activeClassName="!text-foreground border-b border-foreground"
+                  activeClassName="!text-foreground"
                 >
                   {link.label}
                 </ActiveLink>
@@ -30,6 +29,7 @@ export function Header() {
           </ul>
         </nav>
       </div>
+       <hr className="border-border/40" />
     </header>
   );
 }

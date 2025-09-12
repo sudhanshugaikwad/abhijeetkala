@@ -3,10 +3,11 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/header';
 import { cn } from '@/lib/utils';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
-  title: 'Abhijeet Kala',
-  description: 'Portfolio of Abhijeet Kala',
+  title: 'Portfolio',
+  description: 'Portfolio of a creative professional',
 };
 
 export default function RootLayout({
@@ -25,7 +26,7 @@ export default function RootLayout({
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-grow w-full px-4 sm:px-6 lg:px-8 py-8">
-            {children}
+            <Suspense>{children}</Suspense>
           </main>
         </div>
         <Toaster />
