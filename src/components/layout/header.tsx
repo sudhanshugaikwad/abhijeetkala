@@ -14,7 +14,7 @@ export function Header() {
     <header className="w-full">
       <div className="flex items-center justify-center h-16 px-4 sm:px-6 lg:px-8">
         <nav>
-          <ul className="flex items-center space-x-8">
+          <ul className="flex flex-wrap items-center justify-center space-x-4 sm:space-x-8">
             {navLinks.map((link) => (
               <li key={link.label}>
                 <ActiveLink

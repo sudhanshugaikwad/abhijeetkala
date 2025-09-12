@@ -30,7 +30,7 @@ export default function RootLayout({
           </main>
           <footer className="w-full py-6 px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center text-sm text-muted-foreground border-t border-border/40 pt-6">
-              <p>&copy; {new Date().getFullYear()} Sudhanshu Gaikwad. All Rights Reserved.</p>
+              <p>&copy; {new Date().getFullYear()} Abhijeet Kala. All Rights Reserved.</p>
             </div>
           </footer>
         </div>
