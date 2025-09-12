@@ -2,6 +2,7 @@
 import { ActiveLink } from './active-link';
 
 const navLinks = [
+  { href: '/', label: 'All' },
   { href: '/', label: 'AI', category: 'ai' },
   { href: '/', label: 'Advertising', category: 'advertising' },
   { href: '/', label: 'Creative', category: 'creative' },

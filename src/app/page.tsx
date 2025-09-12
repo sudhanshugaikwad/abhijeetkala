@@ -10,7 +10,7 @@ export default function WorkPage() {
   const category = searchParams.get('category');
 
   const images = PlaceHolderImages.filter(img => {
-    if (!category) return img.id.startsWith('work-') && img.category.toLowerCase() === 'ai';
+    if (!category) return img.id.startsWith('work-');
     return img.category.toLowerCase() === category.toLowerCase() && img.id.startsWith('work-');
   });
 
