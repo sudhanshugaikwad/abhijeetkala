@@ -25,6 +25,7 @@ import {
   DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu';
 import { Slider } from '@/components/ui/slider';
+import Image from 'next/image';
 
 const formatTime = (timeInSeconds: number) => {
   if (isNaN(timeInSeconds)) return '00:00';
@@ -33,7 +34,7 @@ const formatTime = (timeInSeconds: number) => {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
-export function WorkDetailPageClient({ item }: { item: ImagePlaceholder }) {
+export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceholder, relatedItems: ImagePlaceholder[] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -162,16 +163,20 @@ export function WorkDetailPageClient({ item }: { item: ImagePlaceholder }) {
   const VolumeIcon = isMuted || volume === 0 ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
 
   return (
-    <div ref={containerRef} className="fixed inset-0 bg-black/90 z-50 flex flex-col items-center justify-center p-4" onMouseMove={handleMouseMove}>
-      <div className="w-full max-w-5xl mx-auto">
-        <div className={`flex justify-between items-center mb-2 transition-opacity duration-300 ${isControlsVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <h1 className="text-lg font-semibold text-white">{item.title}</h1>
-          <Link href="/" className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors">
-            <ArrowLeft size={16} />
-            Back to home
-          </Link>
+    <div className="bg-background min-h-screen text-white">
+      <div ref={containerRef} className="relative w-full max-w-7xl mx-auto pt-4" onMouseMove={handleMouseMove}>
+        <div className={`absolute top-0 left-0 right-0 z-20 flex justify-between items-center p-4 transition-opacity duration-300 ${isControlsVisible ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="flex flex-col">
+              <h1 className="text-2xl font-bold">{item.title}</h1>
+              <p className="text-muted-foreground">{item.client}</p>
+            </div>
+            <Link href="/" className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors">
+              <ArrowLeft size={16} />
+              Back
+            </Link>
         </div>
-        <div className="aspect-video relative group">
+
+        <div className="aspect-video relative group bg-black rounded-lg overflow-hidden">
           <video
             ref={videoRef}
             autoPlay
@@ -248,8 +253,37 @@ export function WorkDetailPageClient({ item }: { item: ImagePlaceholder }) {
           </div>
         </div>
       </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-3xl">
+            <p className="text-lg text-neutral-300">{item.description}</p>
+        </div>
+
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold tracking-tight text-white mb-8">More to explore</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {relatedItems.map(related => (
+                <Link key={related.id} href={`/work/${related.id}`} className="group">
+                    <div className="aspect-[4/3] relative overflow-hidden rounded-lg border border-neutral-700/60 group-hover:border-neutral-500 transition-colors">
+                        <Image
+                            src={related.imageUrl}
+                            alt={related.title}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            data-ai-hint={related.imageHint}
+                        />
+                         <div className="absolute inset-0 bg-black/20" />
+                    </div>
+                    <div className="mt-2">
+                        <h3 className="font-semibold text-white">{related.title}</h3>
+                        <p className="text-sm text-neutral-400">{related.client}</p>
+                    </div>
+                </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
-
-    

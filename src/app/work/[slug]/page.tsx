@@ -15,7 +15,12 @@ const WorkDetailPage = ({ params }: { params: { slug: string } }) => {
     notFound();
   }
 
-  return <WorkDetailPageClient item={item} />;
+  // Find other items for "More to explore" section
+  const relatedItems = PlaceHolderImages.filter(
+    (img) => img.id.startsWith('work-') && img.id !== item.id
+  ).slice(0, 4);
+
+  return <WorkDetailPageClient item={item} relatedItems={relatedItems} />;
 };
 
 export default WorkDetailPage;
