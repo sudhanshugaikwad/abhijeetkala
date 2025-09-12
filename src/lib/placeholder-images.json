@@ -1,3 +1,94 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "work-1",
+      "description": "Monochrome shot of a modern building facade.",
+      "imageUrl": "https://picsum.photos/seed/work1/800/1200",
+      "imageHint": "architecture monochrome"
+    },
+    {
+      "id": "work-2",
+      "description": "Abstract light trails in a dark environment.",
+      "imageUrl": "https://picsum.photos/seed/work2/1200/800",
+      "imageHint": "light trails"
+    },
+    {
+      "id": "work-3",
+      "description": "Minimalist interior with a single chair.",
+      "imageUrl": "https://picsum.photos/seed/work3/800/1000",
+      "imageHint": "minimalist interior"
+    },
+    {
+      "id": "work-4",
+      "description": "Close-up of a textured concrete wall.",
+      "imageUrl": "https://picsum.photos/seed/work4/1200/900",
+      "imageHint": "concrete texture"
+    },
+    {
+      "id": "work-5",
+      "description": "A foggy forest scene in the early morning.",
+      "imageUrl": "https://picsum.photos/seed/work5/800/1200",
+      "imageHint": "foggy forest"
+    },
+    {
+      "id": "work-6",
+      "description": "Geometric patterns of a skyscraper.",
+      "imageUrl": "https://picsum.photos/seed/work6/900/1200",
+      "imageHint": "skyscraper pattern"
+    },
+    {
+      "id": "work-7",
+      "description": "An empty subway station with fluorescent lighting.",
+      "imageUrl": "https://picsum.photos/seed/work7/1600/900",
+      "imageHint": "subway station"
+    },
+    {
+      "id": "work-8",
+      "description": "Silhouette of a person against a bright window.",
+      "imageUrl": "https://picsum.photos/seed/work8/800/1100",
+      "imageHint": "silhouette window"
+    },
+    {
+      "id": "work-9",
+      "description": "Winding road through a desert landscape.",
+      "imageUrl": "https://picsum.photos/seed/work9/1200/800",
+      "imageHint": "desert road"
+    },
+    {
+      "id": "work-10",
+      "description": "Reflections on a rain-soaked city street at night.",
+      "imageUrl": "https://picsum.photos/seed/work10/900/1100",
+      "imageHint": "rainy city"
+    },
+    {
+      "id": "work-11",
+      "description": "A solitary boat on a calm lake.",
+      "imageUrl": "https://picsum.photos/seed/work11/1500/1000",
+      "imageHint": "calm lake"
+    },
+    {
+      "id": "work-12",
+      "description": "Shadows casting long lines on a sand dune.",
+      "imageUrl": "https://picsum.photos/seed/work12/800/1200",
+      "imageHint": "sand dune"
+    },
+    {
+      "id": "work-13",
+      "description": "A spiral staircase viewed from below.",
+      "imageUrl": "https://picsum.photos/seed/work13/900/1300",
+      "imageHint": "spiral staircase"
+    },
+    {
+      "id": "work-14",
+      "description": "Industrial machinery in a derelict factory.",
+      "imageUrl": "https://picsum.photos/seed/work14/1200/850",
+      "imageHint": "industrial factory"
+    },
+    {
+      "id": "work-15",
+      "description": "Close-up detail of a classic car's headlight.",
+      "imageUrl": "https://picsum.photos/seed/work15/1000/1000",
+      "imageHint": "classic car"
+    }
+  ]
 }
