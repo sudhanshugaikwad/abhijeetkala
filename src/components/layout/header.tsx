@@ -1,7 +1,7 @@
+'use client';
 import { ActiveLink } from './active-link';
 
 const navLinks = [
-  { href: '/', label: 'All', category: 'all' },
   { href: '/', label: 'AI', category: 'ai' },
   { href: '/', label: 'Advertising', category: 'advertising' },
   { href: '/', label: 'Creative', category: 'creative' },
@@ -19,8 +19,8 @@ export function Header() {
                 <ActiveLink
                   href={link.href}
                   category={link.category}
-                  className="text-sm uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground pb-1"
-                  activeClassName="!text-foreground"
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground pb-2"
+                  activeClassName="!text-foreground font-bold border-b-2 border-foreground"
                 >
                   {link.label}
                 </ActiveLink>
