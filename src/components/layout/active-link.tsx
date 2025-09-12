@@ -18,15 +18,14 @@ export function ActiveLink({ href, children, activeClassName, className, categor
   const searchParams = useSearchParams();
   const currentCategory = searchParams.get('category');
 
-  const isActive = pathname === href && (category ? currentCategory === category : !currentCategory && children === 'AI');
-  const isAllActive = pathname === href && !currentCategory && children === 'All';
+  const isActive = pathname === href && (category ? currentCategory === category : (!currentCategory && children === 'All'));
 
-  const linkHref = category ? `${href}?category=${category}` : href;
+  const linkHref = category ? `${href}?category=${category}` : `${href}?category=all`;
 
   return (
     <Link
       href={linkHref}
-      className={cn(className, (isActive || isAllActive) && activeClassName)}
+      className={cn(className, isActive && activeClassName)}
       {...props}
     >
       {children}
