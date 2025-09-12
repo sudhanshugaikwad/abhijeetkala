@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { notFound } from 'next/navigation';
 
@@ -9,30 +8,26 @@ export async function generateStaticParams() {
 }
 
 export default function WorkDetailPage({ params }: { params: { slug: string } }) {
-  const image = PlaceHolderImages.find((img) => img.id === params.slug);
+  const item = PlaceHolderImages.find((img) => img.id === params.slug);
 
-  if (!image) {
+  if (!item) {
     notFound();
   }
 
-  const url = new URL(image.imageUrl);
-  const parts = url.pathname.split('/');
-  const width = parseInt(parts[parts.length - 2]);
-  const height = parseInt(parts[parts.length - 1]);
-
   return (
     <div className="space-y-4">
-        <h1 className="text-center text-lg">{image.client} - {image.title}</h1>
-        <figure>
-          <Image
-            src={image.imageUrl}
-            alt={image.description}
-            width={width}
-            height={height}
-            data-ai-hint={image.imageHint}
-            className="w-full h-auto object-contain"
-          />
-        </figure>
+      <h1 className="text-center text-lg">{item.client} - {item.title}</h1>
+      <figure>
+        <video
+          poster={item.imageUrl}
+          controls
+          autoPlay
+          loop
+          className="w-full h-auto object-contain"
+        >
+          <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+        </video>
+      </figure>
     </div>
   );
 }

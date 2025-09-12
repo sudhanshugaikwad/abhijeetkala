@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useSearchParams } from 'next/navigation';
 
@@ -9,38 +8,36 @@ export default function WorkPage() {
   const searchParams = useSearchParams();
   const category = searchParams.get('category');
 
-  const images = PlaceHolderImages.filter(img => {
+  const items = PlaceHolderImages.filter(img => {
     if (!category) return img.id.startsWith('work-');
     return img.category.toLowerCase() === category.toLowerCase() && img.id.startsWith('work-');
   });
 
   return (
     <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-      {images.map((image) => {
-        const url = new URL(image.imageUrl);
-        const parts = url.pathname.split('/');
-        const width = parseInt(parts[parts.length - 2]);
-        const height = parseInt(parts[parts.length - 1]);
-
-        return (
-          <div key={image.id} className="break-inside-avoid">
-            <Link href={`/work/${image.id}`}>
-              <figure className="group">
-                <Image
-                  src={image.imageUrl}
-                  alt={image.description}
-                  width={width}
-                  height={height}
-                  data-ai-hint={image.imageHint}
-                  className="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-80"
-                />
-                 <figcaption className="text-sm mt-2">{image.title}</figcaption>
-                 <figcaption className="text-xs text-muted-foreground">{image.client}</figcaption>
-              </figure>
-            </Link>
-          </div>
-        );
-      })}
+      {items.map((item) => (
+        <div key={item.id} className="break-inside-avoid">
+          <Link href={`/work/${item.id}`}>
+            <figure className="group relative">
+              <video
+                poster={item.imageUrl}
+                loop
+                muted
+                playsInline
+                className="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-80"
+                onMouseOver={event => (event.target as HTMLVideoElement).play()}
+                onMouseOut={event => (event.target as HTMLVideoElement).pause()}
+              >
+                <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <figcaption className="text-sm">{item.title}</figcaption>
+                <figcaption className="text-xs text-muted-foreground">{item.client}</figcaption>
+              </div>
+            </figure>
+          </Link>
+        </div>
+      ))}
     </div>
   );
 }
