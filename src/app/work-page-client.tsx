@@ -9,7 +9,10 @@ import {
   Pause,
   Settings,
   Maximize,
-  Minimize
+  Minimize,
+  Volume2,
+  Volume1,
+  VolumeX,
 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import {
@@ -40,6 +43,8 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
   const [duration, setDuration] = useState(0);
   const [playbackRate, setPlaybackRate] = useState('1');
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [volume, setVolume] = useState(0); // Muted by default
+  const [isMuted, setIsMuted] = useState(true);
   
   useEffect(() => {
     setVideoRef(videoRef.current, index);
@@ -50,10 +55,15 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
     if (!video) return;
 
     const updateProgress = () => setProgress((video.currentTime / video.duration) * 100);
-    const setVideoDuration = () => setDuration(video.duration);
+    const setVideoDuration = () => {
+        if (video.duration && isFinite(video.duration)) {
+            setDuration(video.duration);
+        }
+    };
     
     video.addEventListener('timeupdate', updateProgress);
     video.addEventListener('loadedmetadata', setVideoDuration);
+    video.addEventListener('durationchange', setVideoDuration);
 
     const handleFullscreenChange = () => setIsFullscreen(!!document.fullscreenElement);
     document.addEventListener('fullscreenchange', handleFullscreenChange);
@@ -61,6 +71,7 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
     return () => {
       video.removeEventListener('timeupdate', updateProgress);
       video.removeEventListener('loadedmetadata', setVideoDuration);
+      video.removeEventListener('durationchange', setVideoDuration);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
   }, []);
@@ -120,6 +131,44 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
     }
   };
   
+  const handleVolumeChange = (value: number[]) => {
+    if (videoRef.current) {
+      const newVolume = value[0];
+      videoRef.current.volume = newVolume;
+      setVolume(newVolume);
+      if (newVolume > 0 && isMuted) {
+        setIsMuted(false);
+        videoRef.current.muted = false;
+      } else if (newVolume === 0 && !isMuted) {
+        setIsMuted(true);
+        videoRef.current.muted = true;
+      }
+    }
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (videoRef.current) {
+      const newMuted = !videoRef.current.muted;
+      videoRef.current.muted = newMuted;
+      setIsMuted(newMuted);
+      if (newMuted) {
+        setVolume(0);
+      } else {
+        // If unmuting and volume was 0, set to a default volume
+        if (videoRef.current.volume === 0) {
+          videoRef.current.volume = 1;
+          setVolume(1);
+        } else {
+          setVolume(videoRef.current.volume);
+        }
+      }
+    }
+  };
+
+  const VolumeIcon = isMuted || volume === 0 ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
+  
   return (
     <div className="group">
         <h2 className="text-lg font-medium mb-4">{item.title}</h2>
@@ -153,9 +202,23 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
                     <span className="text-xs font-mono">{formatTime(duration)}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                    <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={togglePlay}>
-                        {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-                    </Button>
+                    <div className="flex items-center gap-2">
+                        <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={togglePlay}>
+                            {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+                        </Button>
+                         <div className="flex items-center gap-2 group/volume">
+                            <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={toggleMute}>
+                                <VolumeIcon size={20} />
+                            </Button>
+                            <Slider
+                                value={[isMuted ? 0 : volume]}
+                                onValueChange={handleVolumeChange}
+                                max={1}
+                                step={0.05}
+                                className="w-24 h-full hidden group-hover/volume:block"
+                            />
+                        </div>
+                    </div>
 
                     <div className="flex items-center gap-2">
                         <DropdownMenu>
