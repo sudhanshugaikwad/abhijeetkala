@@ -29,14 +29,6 @@ function VideoPlayer({ item }: { item: typeof PlaceHolderImages[0] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const handleMouseEnter = () => {
-    videoRef.current?.play();
-  };
-
-  const handleMouseLeave = () => {
-    videoRef.current?.pause();
-  };
-
   const togglePlay = () => {
     if (videoRef.current?.paused) {
       videoRef.current?.play();
@@ -48,8 +40,6 @@ function VideoPlayer({ item }: { item: typeof PlaceHolderImages[0] }) {
   return (
     <div 
       className="break-inside-avoid"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <div className="group relative">
         <Link href={`/work/${item.id}`}>
