@@ -25,7 +25,6 @@ import {
   DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu';
 import { Slider } from '@/components/ui/slider';
-import Image from 'next/image';
 
 const formatTime = (timeInSeconds: number) => {
   if (isNaN(timeInSeconds)) return '00:00';
@@ -34,6 +33,50 @@ const formatTime = (timeInSeconds: number) => {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
+function VideoItem({ item }: { item: ImagePlaceholder }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  
+  const handleMouseEnter = () => {
+    videoRef.current?.play();
+    setIsPlaying(true);
+  };
+
+  const handleMouseLeave = () => {
+    videoRef.current?.pause();
+    setIsPlaying(false);
+  };
+  
+  return (
+      <Link href={`/work/${item.id}`} className="group block">
+          <div 
+            className="aspect-video relative overflow-hidden rounded-lg border border-neutral-700/60 group-hover:border-neutral-500 transition-colors"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+              <video
+                  ref={videoRef}
+                  src={item.videoUrl}
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+               <div className="absolute inset-0 bg-black/20" />
+               { !isPlaying && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Play className="text-white h-12 w-12 opacity-80 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                )}
+          </div>
+          <div className="mt-2">
+              <h3 className="font-semibold text-white">{item.title}</h3>
+              <p className="text-sm text-neutral-400">{item.client}</p>
+          </div>
+      </Link>
+  );
+}
+
 export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceholder, relatedItems: ImagePlaceholder[] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -41,12 +84,17 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
   const [playbackRate, setPlaybackRate] = useState('1');
   const [isControlsVisible, setIsControlsVisible] = useState(true);
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [visibleItems, setVisibleItems] = useState(4);
 
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const showMoreItems = () => {
+    setVisibleItems((prev) => prev + 4);
+  };
 
   useEffect(() => {
     if (videoRef.current) {
@@ -90,13 +138,13 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
     handleMouseMove(); // Show controls on initial load
     const currentTimeout = controlsTimeoutRef.current;
     
-    window.addEventListener('mousemove', handleMouseMove);
+    containerRef.current?.addEventListener('mousemove', handleMouseMove);
 
     return () => {
         if (currentTimeout) {
             clearTimeout(currentTimeout);
         }
-        window.removeEventListener('mousemove', handleMouseMove);
+        containerRef.current?.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('fullscreenchange', handleFullscreenChange);
         if (video) {
           video.removeEventListener('timeupdate', updateProgress);
@@ -164,7 +212,7 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
 
   return (
     <div className="bg-background min-h-screen text-white">
-      <div ref={containerRef} className="relative w-full max-w-7xl mx-auto pt-4" onMouseMove={handleMouseMove}>
+      <div ref={containerRef} className="relative w-full max-w-7xl mx-auto pt-4">
         <div className={`absolute top-0 left-0 right-0 z-20 flex justify-between items-center p-4 transition-opacity duration-300 ${isControlsVisible ? 'opacity-100' : 'opacity-0'}`}>
             <div className="flex flex-col">
               <h1 className="text-2xl font-bold">{item.title}</h1>
@@ -262,25 +310,17 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
         <div className="mt-16">
           <h2 className="text-2xl font-bold tracking-tight text-white mb-8">More to explore</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {relatedItems.map(related => (
-                <Link key={related.id} href={`/work/${related.id}`} className="group">
-                    <div className="aspect-[4/3] relative overflow-hidden rounded-lg border border-neutral-700/60 group-hover:border-neutral-500 transition-colors">
-                        <Image
-                            src={related.imageUrl}
-                            alt={related.title}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                            data-ai-hint={related.imageHint}
-                        />
-                         <div className="absolute inset-0 bg-black/20" />
-                    </div>
-                    <div className="mt-2">
-                        <h3 className="font-semibold text-white">{related.title}</h3>
-                        <p className="text-sm text-neutral-400">{related.client}</p>
-                    </div>
-                </Link>
+            {relatedItems.slice(0, visibleItems).map(related => (
+                <VideoItem key={related.id} item={related} />
             ))}
           </div>
+           {visibleItems < relatedItems.length && (
+            <div className="mt-12 text-center">
+            <Button variant="link" className="text-neutral-400 hover:text-white" onClick={showMoreItems}>
+                See more
+            </Button>
+            </div>
+        )}
         </div>
       </div>
 

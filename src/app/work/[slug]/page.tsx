@@ -18,7 +18,7 @@ const WorkDetailPage = ({ params }: { params: { slug: string } }) => {
   // Find other items for "More to explore" section
   const relatedItems = PlaceHolderImages.filter(
     (img) => img.id.startsWith('work-') && img.id !== item.id
-  ).slice(0, 4);
+  );
 
   return <WorkDetailPageClient item={item} relatedItems={relatedItems} />;
 };
