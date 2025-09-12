@@ -1,10 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useSearchParams } from 'next/navigation';
-import { useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { WorkPageClient } from './work-page-client';
 
 export default function WorkPage() {

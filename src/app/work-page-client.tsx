@@ -1,35 +1,49 @@
 'use client';
 
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import type { ImagePlaceholder } from '@/lib/placeholder-images';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
-type Item = typeof PlaceHolderImages[number];
-
-export function WorkPageClient({ items }: { items: Item[] }) {
+export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
   const [visibleItems, setVisibleItems] = useState(10);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const showMoreItems = () => {
     setVisibleItems((prev) => prev + 5);
   };
 
+  const handleMouseEnter = (index: number) => {
+    videoRefs.current[index]?.play();
+  };
+
+  const handleMouseLeave = (index: number) => {
+    const video = videoRefs.current[index];
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center">
+    <div className="container mx-auto">
         <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 p-4">
-            {items.slice(0, visibleItems).map((item) => (
+            {items.slice(0, visibleItems).map((item, index) => (
             <Link key={item.id} href={`/work/${item.id}`} className="break-inside-avoid block group">
-                <div className="relative aspect-auto overflow-hidden rounded-lg border border-neutral-700/60 hover:border-neutral-500 transition-colors duration-300">
-                <Image
-                    src={item.imageUrl}
-                    alt={item.title}
-                    width={800}
-                    height={1200}
-                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                    data-ai-hint={item.imageHint}
-                />
-                <div className="absolute inset-0 bg-black/20" />
+                <div 
+                  className="relative aspect-auto overflow-hidden rounded-lg border border-neutral-700/60 hover:border-neutral-500 transition-colors duration-300"
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={() => handleMouseLeave(index)}
+                >
+                  <video
+                      ref={el => videoRefs.current[index] = el}
+                      src={item.videoUrl}
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/20" />
                 </div>
             </Link>
             ))}
