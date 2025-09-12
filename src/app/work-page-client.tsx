@@ -3,52 +3,214 @@
 import type { ImagePlaceholder } from '@/lib/placeholder-images';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import {
+  Play,
+  Pause,
+  Settings,
+  Maximize,
+  Minimize
+} from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuLabel,
+} from '@/components/ui/dropdown-menu';
+
+const formatTime = (timeInSeconds: number) => {
+  if (isNaN(timeInSeconds)) return '00:00';
+  const minutes = Math.floor(timeInSeconds / 60);
+  const seconds = Math.floor(timeInSeconds % 60);
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+};
+
+function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index: number, setVideoRef: (el: HTMLVideoElement | null, index: number) => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isControlsVisible, setIsControlsVisible] = useState(false);
+  
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [playbackRate, setPlaybackRate] = useState('1');
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  
+  useEffect(() => {
+    setVideoRef(videoRef.current, index);
+  }, [index, setVideoRef]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const updateProgress = () => setProgress((video.currentTime / video.duration) * 100);
+    const setVideoDuration = () => setDuration(video.duration);
+    
+    video.addEventListener('timeupdate', updateProgress);
+    video.addEventListener('loadedmetadata', setVideoDuration);
+
+    const handleFullscreenChange = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+    return () => {
+      video.removeEventListener('timeupdate', updateProgress);
+      video.removeEventListener('loadedmetadata', setVideoDuration);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+
+  const handleMouseEnter = () => {
+    setIsControlsVisible(true);
+    videoRef.current?.play();
+    setIsPlaying(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsControlsVisible(false);
+    videoRef.current?.pause();
+    setIsPlaying(false);
+  };
+
+  const togglePlay = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+        setIsPlaying(true);
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  const handleProgressChange = (value: number[]) => {
+    if (videoRef.current) {
+      const newTime = (value[0] / 100) * duration;
+      videoRef.current.currentTime = newTime;
+    }
+  };
+
+  const handlePlaybackRateChange = (rate: string) => {
+    setPlaybackRate(rate);
+    if(videoRef.current) {
+      videoRef.current.playbackRate = Number(rate);
+    }
+  };
+
+  const toggleFullscreen = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const videoContainer = containerRef.current;
+    if (!videoContainer) return;
+
+    if (!document.fullscreenElement) {
+        videoContainer.requestFullscreen().catch(err => {
+            alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+        });
+    } else {
+        document.exitFullscreen();
+    }
+  };
+  
+  return (
+    <div className="group">
+        <h2 className="text-lg font-medium mb-4">{item.title}</h2>
+        <div 
+          ref={containerRef}
+          className="relative aspect-video overflow-hidden rounded-lg border border-neutral-700/60 hover:border-neutral-500 transition-colors duration-300"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Link href={`/work/${item.id}`} className="block w-full h-full">
+            <video
+                ref={videoRef}
+                src={item.videoUrl}
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </Link>
+          <div className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${isControlsVisible ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="absolute bottom-0 left-0 right-0 p-3 flex flex-col gap-2 text-white">
+                <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono">{formatTime(videoRef.current?.currentTime ?? 0)}</span>
+                    <Slider
+                        value={[progress]}
+                        onValueChange={handleProgressChange}
+                        max={100}
+                        step={0.1}
+                        className="w-full"
+                    />
+                    <span className="text-xs font-mono">{formatTime(duration)}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                    <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={togglePlay}>
+                        {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+                    </Button>
+
+                    <div className="flex items-center gap-2">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={(e) => e.stopPropagation()}>
+                                    <Settings size={20} />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent onClick={(e) => e.stopPropagation()} className="bg-black/80 border-gray-700 text-white w-40">
+                                <DropdownMenuLabel>Playback Speed</DropdownMenuLabel>
+                                <DropdownMenuRadioGroup value={playbackRate} onValueChange={handlePlaybackRateChange}>
+                                    <DropdownMenuRadioItem value="0.5">0.5x</DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem value="1">Normal</DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem value="1.5">1.5x</DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem value="2">2x</DropdownMenuRadioItem>
+                                </DropdownMenuRadioGroup>
+                                <DropdownMenuSeparator className="bg-gray-700" />
+                                <DropdownMenuLabel>Quality</DropdownMenuLabel>
+                                <DropdownMenuRadioGroup value="auto">
+                                    <DropdownMenuRadioItem value="1080p">1080p</DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem value="720p">720p</DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem value="480p">480p</DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem value="auto">Auto</DropdownMenuRadioItem>
+                                </DropdownMenuRadioGroup>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                        <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={toggleFullscreen}>
+                           {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+                        </Button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  );
+}
 
 export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
-  const [visibleItems, setVisibleItems] = useState(3);
+  const [visibleItems, setVisibleItems] = useState(4);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const showMoreItems = () => {
-    setVisibleItems((prev) => prev + 3);
+    setVisibleItems((prev) => prev + 4);
   };
-
-  const handleMouseEnter = (index: number) => {
-    videoRefs.current[index]?.play();
-  };
-
-  const handleMouseLeave = (index: number) => {
-    const video = videoRefs.current[index];
-    if (video) {
-      video.pause();
-      video.currentTime = 0;
-    }
-  };
+  
+  const setVideoRef = (el: HTMLVideoElement | null, index: number) => {
+    videoRefs.current[index] = el;
+  }
 
   return (
     <div className="max-w-3xl mx-auto">
         <div className="space-y-12">
             {items.slice(0, visibleItems).map((item, index) => (
-              <div key={item.id} className="group">
-                  <h2 className="text-lg font-medium mb-4">{item.title}</h2>
-                  <Link href={`/work/${item.id}`} className="break-inside-avoid block">
-                      <div 
-                        className="relative aspect-video overflow-hidden rounded-lg border border-neutral-700/60 hover:border-neutral-500 transition-colors duration-300"
-                        onMouseEnter={() => handleMouseEnter(index)}
-                        onMouseLeave={() => handleMouseLeave(index)}
-                      >
-                        <video
-                            ref={el => videoRefs.current[index] = el}
-                            src={item.videoUrl}
-                            muted
-                            loop
-                            playsInline
-                            className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-black/20" />
-                      </div>
-                  </Link>
-              </div>
+              <VideoItem key={item.id} item={item} index={index} setVideoRef={setVideoRef} />
             ))}
         </div>
         {visibleItems < items.length && (
