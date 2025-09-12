@@ -55,7 +55,6 @@ function VideoPlayer({ item }: { item: typeof PlaceHolderImages[0] }) {
         <Link href={`/work/${item.id}`}>
           <video
             ref={videoRef}
-            poster={item.imageUrl}
             loop
             muted
             playsInline
@@ -63,7 +62,7 @@ function VideoPlayer({ item }: { item: typeof PlaceHolderImages[0] }) {
             onPause={() => setIsPlaying(false)}
             className="w-full h-auto object-cover transition-opacity duration-300 cursor-pointer"
           >
-            <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+            <source src={item.videoUrl} type="video/mp4" />
           </video>
         </Link>
         <div className="absolute top-0 left-0 right-0 p-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-end items-start gap-1 bg-gradient-to-b from-black/50 to-transparent">

@@ -19,13 +19,12 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
       <h1 className="text-center text-lg">{item.client} - {item.title}</h1>
       <figure>
         <video
-          poster={item.imageUrl}
           controls
           autoPlay
           loop
           className="w-full h-auto object-contain"
         >
-          <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+          <source src={item.videoUrl} type="video/mp4" />
         </video>
       </figure>
     </div>
