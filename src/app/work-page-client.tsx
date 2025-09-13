@@ -32,7 +32,7 @@ const formatTime = (timeInSeconds: number) => {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
-function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index: number, setVideoRef: (el: HTMLVideoElement | null, index: number) => void }) {
+function VideoItem({ item }: { item: ImagePlaceholder }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -43,17 +43,17 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
   const [playbackRate, setPlaybackRate] = useState('1');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [volume, setVolume] = useState(1);
-  const [isMuted, setIsMuted] = useState(true); // Muted by default
+  const [isMuted, setIsMuted] = useState(true);
+  const [currentTime, setCurrentTime] = useState(0);
   
-  useEffect(() => {
-    setVideoRef(videoRef.current, index);
-  }, [index, setVideoRef]);
-
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    const updateProgress = () => setProgress((video.currentTime / video.duration) * 100);
+    const updateProgress = () => {
+      setProgress((video.currentTime / video.duration) * 100);
+      setCurrentTime(video.currentTime);
+    }
     const setVideoDuration = () => {
         if (video.duration && isFinite(video.duration)) {
             setDuration(video.duration);
@@ -89,10 +89,23 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
     }
   };
 
-  const handleProgressChange = (value: number[]) => {
+  const handleVideoClick = () => {
     if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+        setIsPlaying(true);
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      }
+    }
+  }
+
+  const handleProgressChange = (value: number[]) => {
+    if (videoRef.current && isFinite(duration)) {
       const newTime = (value[0] / 100) * duration;
       videoRef.current.currentTime = newTime;
+      setProgress(value[0]);
     }
   };
 
@@ -141,9 +154,8 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
       videoRef.current.muted = newMuted;
       setIsMuted(newMuted);
       if (newMuted) {
-          setVolume(0);
+          setVolume(videoRef.current.volume);
       } else {
-        // If unmuting and volume was 0, set to a default volume
         if (videoRef.current.volume === 0) {
             const defaultVolume = 1;
             videoRef.current.volume = defaultVolume;
@@ -155,7 +167,7 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
     }
   };
 
-  const VolumeIcon = isMuted || volume === 0 ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
+  const VolumeIcon = isMuted ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
   
   return (
     <div className="group">
@@ -164,20 +176,19 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
           ref={containerRef}
           className="relative aspect-video overflow-hidden rounded-lg border border-border/20"
         >
-          <Link href={`/work/${item.id}`} className="block w-full h-full">
-            <video
-                ref={videoRef}
-                src={item.videoUrl}
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover"
-            />
-          </Link>
+          <video
+              ref={videoRef}
+              src={item.videoUrl}
+              muted={isMuted}
+              loop
+              playsInline
+              onClick={handleVideoClick}
+              className="w-full h-full object-cover"
+          />
           <div className="absolute inset-0 bg-black/40">
             <div className="absolute bottom-0 left-0 right-0 p-3 flex flex-col gap-2 text-white">
                 <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono">{formatTime(videoRef.current?.currentTime ?? 0)}</span>
+                    <span className="text-xs font-mono">{formatTime(currentTime)}</span>
                     <Slider
                         value={[progress]}
                         onValueChange={handleProgressChange}
@@ -209,7 +220,7 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
                     <div className="flex items-center gap-2">
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={(e) => e.stopPropagation()}>
+                                <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={(e) => {e.preventDefault(); e.stopPropagation();}}>
                                     <Settings size={20} />
                                 </Button>
                             </DropdownMenuTrigger>
@@ -244,17 +255,11 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
 }
 
 export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-
-  const setVideoRef = (el: HTMLVideoElement | null, index: number) => {
-    videoRefs.current[index] = el;
-  }
-
   return (
     <div className="container mx-auto max-w-3xl">
         <div className="space-y-16">
-            {items.map((item, index) => (
-              <VideoItem key={item.id} item={item} index={index} setVideoRef={setVideoRef} />
+            {items.map((item) => (
+              <VideoItem key={item.id} item={item} />
             ))}
         </div>
     </div>
