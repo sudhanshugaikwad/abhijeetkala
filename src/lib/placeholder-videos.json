@@ -1,4 +1,3 @@
-
 {
   "placeholderVideos": [
     {
@@ -79,7 +78,7 @@
       "client": "Nomad",
       "category": "Advertising",
       "description": "Winding road through a desert landscape.",
-      "videoUrl": "/assets/videos/TearsOfSteel.mp4",
+      "videoUrl": "/assets/videos/KDC.mp4",
       "imageHint": "desert road"
     },
     {
@@ -101,40 +100,13 @@
       "imageHint": "calm lake"
     },
     {
-      "id": "work-12",
+      "id": "12",
       "videoTitle": "Dune",
       "client": "Arrakis",
       "category": "AI",
       "description": "Shadows casting long lines on a sand dune.",
       "videoUrl": "/assets/videos/BigBuckBunny.mp4",
       "imageHint": "sand dune"
-    },
-    {
-      "id": "work-13",
-      "videoTitle": "Vertigo",
-      "client": "Aperture",
-      "category": "Creative",
-      "description": "A spiral staircase viewed from below.",
-      "videoUrl": "/assets/videos/ForBiggerBlazes.mp4",
-      "imageHint": "spiral staircase"
-    },
-    {
-      "id": "work-14",
-      "videoTitle": "Rust & Dust",
-      "client": "Industro",
-      "category": "Food",
-      "description": "Industrial machinery in a derelict factory.",
-      "videoUrl": "/assets/videos/ForBiggerEscapes.mp4",
-      "imageHint": "industrial factory"
-    },
-    {
-      "id": "work-15",
-      "videoTitle": "Vintage",
-      "client": "Chrono",
-      "category": "Advertising",
-      "description": "Close-up detail of a classic car's headlight.",
-      "videoUrl": "/assets/videos/ForBiggerFun.mp4",
-      "imageHint": "classic car"
     }
   ]
 }
