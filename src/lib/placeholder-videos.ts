@@ -1,3 +1,15 @@
+import KFC from "../app/assets/videos/KFC.mp4";
+import ForBiggerBlazes from "../app/assets/videos/KFC.mp4";
+import ForBiggerEscapes from "../app/assets/videos/KFC.mp4";
+import ForBiggerFun from "../app/assets/videos/KFC.mp4";
+import ForBiggerJoyrides from "../app/assets/videos/KFC.mp4";
+import ForBiggerMeltdowns from "../app/assets/videos/KFC.mp4";
+import Sintel from "../app/assets/videos/KFC.mp4";
+import SubaruOutback from "../app/assets/videos/KFC.mp4";
+import KDC from "../app/assets/videos/KFC.mp4";
+import WeAreGoingOnAnAdventure from "../app/assets/videos/KFC.mp4";
+import WhatCarCanYouGetForAGrand from "../app/assets/videos/KFC.mp4";
+import BigBuckBunny from "../app/assets/videos/KFC.mp4";
 
 export const placeholderVideos = [
   {
@@ -6,7 +18,7 @@ export const placeholderVideos = [
     client: "Archinnect",
     category: "Creative",
     description: "Monochrome shot of a modern building facade.",
-    videoUrl: "/assets/videos/KFC.mp4",
+    videoUrl: KFC,
     imageHint: "architecture monochrome"
   },
   {
@@ -15,7 +27,7 @@ export const placeholderVideos = [
     client: "Photon",
     category: "Advertising",
     description: "Abstract light trails in a dark environment.",
-    videoUrl: "/assets/videos/ForBiggerBlazes.mp4",
+    videoUrl: ForBiggerBlazes,
     imageHint: "light trails"
   },
   {
@@ -24,7 +36,7 @@ export const placeholderVideos = [
     client: "Minima",
     category: "Creative",
     description: "Minimalist interior with a single chair.",
-    videoUrl: "/assets/videos/ForBiggerEscapes.mp4",
+    videoUrl: ForBiggerEscapes,
     imageHint: "minimalist interior"
   },
   {
@@ -33,7 +45,7 @@ export const placeholderVideos = [
     client: "Rocksteady",
     category: "Creative",
     description: "Close-up of a textured concrete wall.",
-    videoUrl: "/assets/videos/ForBiggerFun.mp4",
+    videoUrl: ForBiggerFun,
     imageHint: "concrete texture"
   },
   {
@@ -42,7 +54,7 @@ export const placeholderVideos = [
     client: "Natura",
     category: "AI",
     description: "A foggy forest scene in the early morning.",
-    videoUrl: "/assets/videos/ForBiggerJoyrides.mp4",
+    videoUrl: ForBiggerJoyrides,
     imageHint: "foggy forest"
   },
   {
@@ -51,7 +63,7 @@ export const placeholderVideos = [
     client: "UrbanBuild",
     category: "Advertising",
     description: "Geometric patterns of a skyscraper.",
-    videoUrl: "/assets/videos/ForBiggerMeltdowns.mp4",
+    videoUrl: ForBiggerMeltdowns,
     imageHint: "skyscraper pattern"
   },
   {
@@ -60,7 +72,7 @@ export const placeholderVideos = [
     client: "MetroCorp",
     category: "Food",
     description: "An empty subway station with fluorescent lighting.",
-    videoUrl: "/assets/videos/Sintel.mp4",
+    videoUrl: Sintel,
     imageHint: "subway station"
   },
   {
@@ -69,7 +81,7 @@ export const placeholderVideos = [
     client: "Solitude",
     category: "Creative",
     description: "Silhouette of a person against a bright window.",
-    videoUrl: "/assets/videos/SubaruOutbackOnStreetAndDirt.mp4",
+    videoUrl: SubaruOutback,
     imageHint: "silhouette window"
   },
   {
@@ -78,7 +90,7 @@ export const placeholderVideos = [
     client: "Nomad",
     category: "Advertising",
     description: "Winding road through a desert landscape.",
-    videoUrl: "/assets/videos/KDC.mp4",
+    videoUrl: KDC,
     imageHint: "desert road"
   },
   {
@@ -87,7 +99,7 @@ export const placeholderVideos = [
     client: "CyberDyne",
     category: "AI",
     description: "Reflections on a rain-soaked city street at night.",
-    videoUrl: "/assets/videos/WeAreGoingOnAnAdventure.mp4",
+    videoUrl: WeAreGoingOnAnAdventure,
     imageHint: "rainy city"
   },
   {
@@ -96,7 +108,7 @@ export const placeholderVideos = [
     client: "Aqua",
     category: "Food",
     description: "A solitary boat on a calm lake.",
-    videoUrl: "/assets/videos/WhatCarCanYouGetForAGrand.mp4",
+    videoUrl: WhatCarCanYouGetForAGrand,
     imageHint: "calm lake"
   },
   {
@@ -105,19 +117,7 @@ export const placeholderVideos = [
     client: "Arrakis",
     category: "AI",
     description: "Shadows casting long lines on a sand dune.",
-    videoUrl: "/assets/videos/BigBuckBunny.mp4",
+    videoUrl: BigBuckBunny,
     imageHint: "sand dune"
   }
 ];
-
-export type VideoPlaceholder = {
-  id: string;
-  videoTitle: string;
-  client: string;
-  category: string;
-  description: string;
-  videoUrl: string;
-  imageHint: string;
-};
-
-export const PlaceHolderVideos: VideoPlaceholder[] = placeholderVideos;
