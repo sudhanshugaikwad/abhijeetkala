@@ -2,7 +2,6 @@
 
 import { PlaceHolderVideos } from '@/lib/placeholder-videos';
 import { WorkPageClient } from './work-page-client';
-import { Button } from '@/components/ui/button';
 import { useSearchParams } from 'next/navigation';
 import { useState, useMemo, Suspense } from 'react';
 
@@ -30,9 +29,9 @@ function WorkPageContent() {
       <WorkPageClient items={items} />
       {visibleItems < allItems.length && (
         <div className="text-center mt-12">
-          <Button onClick={showMoreItems} variant="outline" size="lg">
+          <p onClick={showMoreItems} className="cursor-pointer text-muted-foreground hover:text-foreground transition-colors">
             See more
-          </Button>
+          </p>
         </div>
       )}
     </>
