@@ -1,6 +1,6 @@
 'use client';
 
-import type { ImagePlaceholder } from '@/lib/placeholder-images';
+import type { VideoPlaceholder } from '@/lib/placeholder-videos';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
@@ -32,7 +32,7 @@ const formatTime = (timeInSeconds: number) => {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
-function VideoItem({ item }: { item: ImagePlaceholder }) {
+function VideoItem({ item }: { item: VideoPlaceholder }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -171,7 +171,7 @@ function VideoItem({ item }: { item: ImagePlaceholder }) {
   
   return (
     <div className="group">
-        <h2 className="text-lg font-medium mb-4 text-foreground/80">{item.title}</h2>
+        <h2 className="text-lg font-medium mb-4 text-foreground/80">{item.videoTitle}</h2>
         <div 
           ref={containerRef}
           className="relative aspect-video overflow-hidden rounded-lg border border-border/20"
@@ -254,7 +254,7 @@ function VideoItem({ item }: { item: ImagePlaceholder }) {
   );
 }
 
-export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
+export function WorkPageClient({ items }: { items: VideoPlaceholder[] }) {
   return (
     <div className="container mx-auto max-w-3xl">
         <div className="space-y-16">

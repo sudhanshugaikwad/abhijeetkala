@@ -1,6 +1,6 @@
 'use client';
 
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { PlaceHolderVideos } from '@/lib/placeholder-videos';
 import { WorkPageClient } from './work-page-client';
 import { Button } from '@/components/ui/button';
 import { useSearchParams } from 'next/navigation';
@@ -12,9 +12,9 @@ export default function WorkPage() {
 
   const allItems = useMemo(() => {
     if (category && category !== 'all') {
-      return PlaceHolderImages.filter((item) => item.category.toLowerCase() === category);
+      return PlaceHolderVideos.filter((item) => item.category.toLowerCase() === category);
     }
-    return PlaceHolderImages;
+    return PlaceHolderVideos;
   }, [category]);
   
   const [visibleItems, setVisibleItems] = useState(4);
