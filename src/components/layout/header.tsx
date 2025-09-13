@@ -1,13 +1,14 @@
 'use client';
 import { ActiveLink } from './active-link';
-import type { ComponentType } from 'react';
+import type { ComponentType, ReactNode } from 'react';
+import { Home, Bot, Megaphone, Brush, Utensils } from 'lucide-react';
 
-const navLinks: { href: string; label: string; category?: string }[] = [
-  { href: '/', label: 'All'},
-  { href: '/', label: 'AI', category: 'ai' },
-  { href: '/', label: 'Advertising', category: 'advertising' },
-  { href: '/', label: 'Creative', category: 'creative' },
-  { href: '/', label: 'Food', category: 'food' },
+const navLinks: { href: string; label: string; category?: string, icon: ReactNode }[] = [
+  { href: '/', label: 'All', icon: <Home /> },
+  { href: '/', label: 'AI', category: 'ai', icon: <Bot /> },
+  { href: '/', label: 'Advertising', category: 'advertising', icon: <Megaphone /> },
+  { href: '/', label: 'Creative', category: 'creative', icon: <Brush /> },
+  { href: '/', label: 'Food', category: 'food', icon: <Utensils /> },
 ];
 
 export function Header() {
@@ -21,9 +22,10 @@ export function Header() {
                 <ActiveLink
                   href={link.href}
                   category={link.category}
-                  className="px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground rounded-full"
+                  className="px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground rounded-full flex items-center gap-2"
                   activeClassName="!text-foreground bg-white/10"
                 >
+                  {link.icon}
                   <span>{link.label}</span>
                 </ActiveLink>
               </li>
