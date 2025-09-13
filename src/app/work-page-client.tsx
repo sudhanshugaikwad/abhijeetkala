@@ -5,7 +5,6 @@ import { motion, useAnimation, useInView } from 'framer-motion';
 import {
   Play,
   Pause,
-  Settings,
   Maximize,
   Minimize,
   Volume2,
@@ -237,44 +236,6 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
               </div>
 
               <div className="flex items-center gap-2">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="text-white hover:bg-white/20 hover:text-white"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                      }}
-                    >
-                      <Settings size={20} />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    onClick={(e) => e.stopPropagation()}
-                    className="bg-background/80 border-border text-foreground w-40"
-                  >
-                    <DropdownMenuLabel>Playback Speed</DropdownMenuLabel>
-                    <DropdownMenuRadioGroup
-                      value={playbackRate}
-                      onValueChange={handlePlaybackRateChange}
-                    >
-                      <DropdownMenuRadioItem value="0.5">0.5x</DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="1">Normal</DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="1.5">1.5x</DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="2">2x</DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                    <DropdownMenuSeparator className="bg-border" />
-                    <DropdownMenuLabel>Quality</DropdownMenuLabel>
-                    <DropdownMenuRadioGroup value="auto">
-                      <DropdownMenuRadioItem value="1080p">1080p</DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="720p">720p</DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="480p">480p</DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="auto">Auto</DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
                 <Button
                   variant="ghost"
                   size="icon"
