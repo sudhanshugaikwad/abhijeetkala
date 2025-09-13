@@ -171,7 +171,7 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
   
   return (
     <div className="group">
-        <h2 className="text-lg font-medium mb-4">{item.title}</h2>
+        <h2 className="text-lg font-medium mb-4 text-foreground/80">{item.title}</h2>
         <div 
           ref={containerRef}
           className="relative aspect-video overflow-hidden rounded-lg border border-neutral-700/60 hover:border-neutral-500 transition-colors duration-300"
@@ -188,7 +188,7 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
-          <div className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${isControlsVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${isControlsVisible ? 'opacity-100' : 'opacity-0'}`}>
             <div className="absolute bottom-0 left-0 right-0 p-3 flex flex-col gap-2 text-white">
                 <div className="flex items-center gap-2">
                     <span className="text-xs font-mono">{formatTime(videoRef.current?.currentTime ?? 0)}</span>
@@ -258,11 +258,11 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
 }
 
 export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
-  const [visibleItems, setVisibleItems] = useState(4);
+  const [visibleItems, setVisibleItems] = useState(3);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const showMoreItems = () => {
-    setVisibleItems((prev) => prev + 4);
+    setVisibleItems((prev) => prev + 3);
   };
   
   const setVideoRef = (el: HTMLVideoElement | null, index: number) => {
@@ -270,15 +270,15 @@ export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
   }
 
   return (
-    <div className="container mx-auto">
-        <div className="space-y-12">
+    <div className="container mx-auto max-w-3xl">
+        <div className="space-y-16">
             {items.slice(0, visibleItems).map((item, index) => (
               <VideoItem key={item.id} item={item} index={index} setVideoRef={setVideoRef} />
             ))}
         </div>
         {visibleItems < items.length && (
-            <div className="mt-12 text-center">
-            <Button variant="link" className="text-neutral-400 hover:text-white" onClick={showMoreItems}>
+            <div className="mt-16 text-center">
+            <Button variant="link" className="text-muted-foreground hover:text-foreground" onClick={showMoreItems}>
                 See more
             </Button>
             </div>
