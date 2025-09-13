@@ -1,123 +1,120 @@
-import KFC from "../app/assets/videos/KFC.mp4";
-import ForBiggerBlazes from "../app/assets/videos/KFC.mp4";
-import ForBiggerEscapes from "../app/assets/videos/KFC.mp4";
-import ForBiggerFun from "../app/assets/videos/KFC.mp4";
-import ForBiggerJoyrides from "../app/assets/videos/KFC.mp4";
-import ForBiggerMeltdowns from "../app/assets/videos/KFC.mp4";
-import Sintel from "../app/assets/videos/KFC.mp4";
-import SubaruOutback from "../app/assets/videos/KFC.mp4";
-import KDC from "../app/assets/videos/KFC.mp4";
-import WeAreGoingOnAnAdventure from "../app/assets/videos/KFC.mp4";
-import WhatCarCanYouGetForAGrand from "../app/assets/videos/KFC.mp4";
-import BigBuckBunny from "../app/assets/videos/KFC.mp4";
+type VideoPlaceholder = {
+  id: string;
+  videoTitle: string;
+  client: string;
+  category: string;
+  description: string;
+  videoUrl: string;
+  imageHint: string;
+};
 
-export const placeholderVideos = [
+export const PlaceHolderVideos: VideoPlaceholder[] = [
   {
     id: "1",
-    videoTitle: "Modern Facade",
+    videoTitle: "KFC",
     client: "Archinnect",
     category: "Creative",
     description: "Monochrome shot of a modern building facade.",
-    videoUrl: KFC,
+    videoUrl: "/assets/videos/KFC.mp4",
     imageHint: "architecture monochrome"
   },
   {
     id: "2",
-    videoTitle: "Light Speed",
+    videoTitle: "For Bigger Blazes",
     client: "Photon",
     category: "Advertising",
     description: "Abstract light trails in a dark environment.",
-    videoUrl: ForBiggerBlazes,
+    videoUrl: "/assets/videos/ForBiggerBlazes.mp4",
     imageHint: "light trails"
   },
   {
     id: "3",
-    videoTitle: "The Lone Chair",
+    videoTitle: "For Bigger Escapes",
     client: "Minima",
     category: "Creative",
     description: "Minimalist interior with a single chair.",
-    videoUrl: ForBiggerEscapes,
+    videoUrl: "/assets/videos/ForBiggerEscapes.mp4",
     imageHint: "minimalist interior"
   },
   {
     id: "4",
-    videoTitle: "Brutalism",
+    videoTitle: "For Bigger Fun",
     client: "Rocksteady",
     category: "Creative",
     description: "Close-up of a textured concrete wall.",
-    videoUrl: ForBiggerFun,
+    videoUrl: "/assets/videos/ForBiggerFun.mp4",
     imageHint: "concrete texture"
   },
   {
     id: "5",
-    videoTitle: "Forest Spirit",
+    videoTitle: "For Bigger Joyrides",
     client: "Natura",
     category: "AI",
     description: "A foggy forest scene in the early morning.",
-    videoUrl: ForBiggerJoyrides,
+    videoUrl: "/assets/videos/ForBiggerJoyrides.mp4",
     imageHint: "foggy forest"
   },
   {
     id: "6",
-    videoTitle: "Glass Jungle",
+    videoTitle: "For Bigger Meltdowns",
     client: "UrbanBuild",
     category: "Advertising",
     description: "Geometric patterns of a skyscraper.",
-    videoUrl: ForBiggerMeltdowns,
+    videoUrl: "/assets/videos/ForBiggerMeltdowns.mp4",
     imageHint: "skyscraper pattern"
   },
   {
     id: "7",
-    videoTitle: "Night Shift",
+    videoTitle: "Sintel",
     client: "MetroCorp",
     category: "Food",
     description: "An empty subway station with fluorescent lighting.",
-    videoUrl: Sintel,
+    videoUrl: "/assets/videos/Sintel.mp4",
     imageHint: "subway station"
   },
   {
     id: "8",
-    videoTitle: "Daydream",
+    videoTitle: "Subaru Outback",
     client: "Solitude",
     category: "Creative",
     description: "Silhouette of a person against a bright window.",
-    videoUrl: SubaruOutback,
+    videoUrl: "/assets/videos/SubaruOutbackOnStreetAndDirt.mp4",
     imageHint: "silhouette window"
   },
   {
     id: "9",
-    videoTitle: "The Long Road",
+    videoTitle: "KDC",
     client: "Nomad",
     category: "Advertising",
     description: "Winding road through a desert landscape.",
-    videoUrl: KDC,
+    videoUrl: "/assets/videos/KDC.mp4",
     imageHint: "desert road"
   },
   {
     id: "10",
-    videoTitle: "Neon Noir",
+    videoTitle: "We Are Going On An Adventure",
     client: "CyberDyne",
     category: "AI",
     description: "Reflections on a rain-soaked city street at night.",
-    videoUrl: WeAreGoingOnAnAdventure,
+    videoUrl: "/assets/videos/WeAreGoingOnAnAdventure.mp4",
     imageHint: "rainy city"
   },
   {
     id: "11",
-    videoTitle: "Serenity",
+    videoTitle: "What Car Can You Get For A Grand",
     client: "Aqua",
     category: "Food",
     description: "A solitary boat on a calm lake.",
-    videoUrl: WhatCarCanYouGetForAGrand,
+    videoUrl: "/assets/videos/WhatCarCanYouGetForAGrand.mp4",
     imageHint: "calm lake"
   },
   {
     id: "12",
-    videoTitle: "Dune",
+    videoTitle: "Big Buck Bunny",
     client: "Arrakis",
     category: "AI",
     description: "Shadows casting long lines on a sand dune.",
-    videoUrl: BigBuckBunny,
+    videoUrl: "/assets/videos/BigBuckBunny.mp4",
     imageHint: "sand dune"
   }
 ];

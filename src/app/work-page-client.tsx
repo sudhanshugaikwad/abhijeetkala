@@ -1,6 +1,6 @@
 'use client';
 
-import type { VideoPlaceholder } from '@/lib/placeholder-videos';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
@@ -24,6 +24,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu';
+import { PlaceHolderVideos } from '@/lib/placeholder-videos';
 
 const formatTime = (timeInSeconds: number) => {
   if (isNaN(timeInSeconds)) return '00:00';
@@ -32,7 +33,7 @@ const formatTime = (timeInSeconds: number) => {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
-function VideoItem({ item }: { item: VideoPlaceholder }) {
+function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -254,7 +255,7 @@ function VideoItem({ item }: { item: VideoPlaceholder }) {
   );
 }
 
-export function WorkPageClient({ items }: { items: VideoPlaceholder[] }) {
+export function WorkPageClient({ items }: { items: (typeof PlaceHolderVideos) }) {
   return (
     <div className="container mx-auto max-w-3xl">
         <div className="space-y-16">
