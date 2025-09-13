@@ -270,7 +270,7 @@ export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="container mx-auto">
         <div className="space-y-12">
             {items.slice(0, visibleItems).map((item, index) => (
               <VideoItem key={item.id} item={item} index={index} setVideoRef={setVideoRef} />

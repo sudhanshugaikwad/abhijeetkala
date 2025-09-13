@@ -211,14 +211,14 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
   const VolumeIcon = isMuted || volume === 0 ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
 
   return (
-    <div className="bg-background min-h-screen text-white">
+    <div className="bg-background min-h-screen text-foreground">
       <div ref={containerRef} className="relative w-full max-w-7xl mx-auto pt-4">
         <div className={`absolute top-0 left-0 right-0 z-20 flex justify-between items-center p-4 transition-opacity duration-300 ${isControlsVisible ? 'opacity-100' : 'opacity-0'}`}>
             <div className="flex flex-col">
               <h1 className="text-2xl font-bold">{item.title}</h1>
               <p className="text-muted-foreground">{item.client}</p>
             </div>
-            <Link href="/" className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors">
+            <Link href="/" className="flex items-center gap-2 text-foreground hover:text-foreground/80 transition-colors">
               <ArrowLeft size={16} />
               Back
             </Link>
@@ -238,7 +238,7 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
           </video>
           <div className={`absolute bottom-0 left-0 right-0 p-3 flex flex-col gap-2 bg-gradient-to-t from-black/70 to-transparent transition-opacity duration-300 ${isControlsVisible ? 'opacity-100' : 'opacity-0'}`}>
             <div className="flex items-center gap-2">
-              <span className="text-white text-xs font-mono">{formatTime(videoRef.current?.currentTime ?? 0)}</span>
+              <span className="text-foreground text-xs font-mono">{formatTime(videoRef.current?.currentTime ?? 0)}</span>
               <Slider
                 value={[progress]}
                 onValueChange={handleProgressChange}
@@ -246,15 +246,15 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
                 step={0.1}
                 className="w-full"
               />
-              <span className="text-white text-xs font-mono">{formatTime(duration)}</span>
+              <span className="text-foreground text-xs font-mono">{formatTime(duration)}</span>
             </div>
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={togglePlay}>
+                <Button variant="ghost" size="icon" className="text-foreground hover:bg-foreground/20 hover:text-foreground" onClick={togglePlay}>
                   {isPlaying ? <Pause /> : <Play />}
                 </Button>
                 <div className="flex items-center gap-2 group/volume">
-                  <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={toggleMute}>
+                  <Button variant="ghost" size="icon" className="text-foreground hover:bg-foreground/20 hover:text-foreground" onClick={toggleMute}>
                     <VolumeIcon />
                   </Button>
                   <Slider
@@ -270,11 +270,11 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
               <div className="flex items-center gap-2">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white">
+                    <Button variant="ghost" size="icon" className="text-foreground hover:bg-foreground/20 hover:text-foreground">
                       <Settings />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-40 bg-black/80 border-gray-700 text-white">
+                  <DropdownMenuContent className="w-40 bg-background/80 border-border text-foreground">
                     <DropdownMenuLabel>Playback Speed</DropdownMenuLabel>
                     <DropdownMenuRadioGroup value={playbackRate} onValueChange={setPlaybackRate}>
                       <DropdownMenuRadioItem value="0.5">0.5x</DropdownMenuRadioItem>
@@ -282,7 +282,7 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
                       <DropdownMenuRadioItem value="1.5">1.5x</DropdownMenuRadioItem>
                       <DropdownMenuRadioItem value="2">2x</DropdownMenuRadioItem>
                     </DropdownMenuRadioGroup>
-                    <DropdownMenuSeparator className="bg-gray-700"/>
+                    <DropdownMenuSeparator className="bg-border"/>
                     <DropdownMenuLabel>Quality</DropdownMenuLabel>
                     <DropdownMenuRadioGroup value="auto">
                       <DropdownMenuRadioItem value="1080p">1080p</DropdownMenuRadioItem>
@@ -293,7 +293,7 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white" onClick={toggleFullscreen}>
+                <Button variant="ghost" size="icon" className="text-foreground hover:bg-foreground/20 hover:text-foreground" onClick={toggleFullscreen}>
                   {isFullscreen ? <Minimize /> : <Maximize />}
                 </Button>
               </div>
@@ -304,11 +304,11 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="max-w-3xl">
-            <p className="text-lg text-neutral-300">{item.description}</p>
+            <p className="text-lg text-muted-foreground">{item.description}</p>
         </div>
 
         <div className="mt-16">
-          <h2 className="text-2xl font-bold tracking-tight text-white mb-8">More to explore</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-foreground mb-8">More to explore</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {relatedItems.slice(0, visibleItems).map(related => (
                 <VideoItem key={related.id} item={related} />
@@ -316,7 +316,7 @@ export function WorkDetailPageClient({ item, relatedItems }: { item: ImagePlaceh
           </div>
            {visibleItems < relatedItems.length && (
             <div className="mt-12 text-center">
-            <Button variant="link" className="text-neutral-400 hover:text-white" onClick={showMoreItems}>
+            <Button variant="link" className="text-muted-foreground hover:text-foreground" onClick={showMoreItems}>
                 See more
             </Button>
             </div>

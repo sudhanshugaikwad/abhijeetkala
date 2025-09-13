@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { WorkDetailPageClient } from './work-detail-page-client';
 
 export async function generateStaticParams() {
-  return PlaceHolderImages.filter(img => img.id.startsWith('work-')).map((image) => ({
+  return PlaceHolderImages.map((image) => ({
     slug: image.id,
   }));
 }
@@ -15,9 +15,8 @@ const WorkDetailPage = ({ params }: { params: { slug: string } }) => {
     notFound();
   }
 
-  // Find other items for "More to explore" section
   const relatedItems = PlaceHolderImages.filter(
-    (img) => img.id.startsWith('work-') && img.id !== item.id
+    (img) => img.id !== item.id
   );
 
   return <WorkDetailPageClient item={item} relatedItems={relatedItems} />;

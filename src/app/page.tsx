@@ -9,8 +9,8 @@ export default function WorkPage() {
   const category = searchParams.get('category') || 'all';
 
   const items = PlaceHolderImages.filter(img => {
-    if (category === 'all') return img.id.startsWith('work-');
-    return img.category.toLowerCase() === category.toLowerCase() && img.id.startsWith('work-');
+    if (category === 'all') return true;
+    return img.category.toLowerCase() === category.toLowerCase();
   });
 
   return <WorkPageClient items={items} />;
