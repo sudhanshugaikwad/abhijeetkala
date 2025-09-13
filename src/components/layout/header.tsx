@@ -4,11 +4,11 @@ import type { ComponentType, ReactNode } from 'react';
 import { Home, Bot, Megaphone, Brush, Utensils } from 'lucide-react';
 
 const navLinks: { href: string; label: string; category?: string, icon: ReactNode }[] = [
-  { href: '/', label: 'All', icon: <Home /> },
-  { href: '/', label: 'AI', category: 'ai', icon: <Bot /> },
-  { href: '/', label: 'Advertising', category: 'advertising', icon: <Megaphone /> },
-  { href: '/', label: 'Creative', category: 'creative', icon: <Brush /> },
-  { href: '/', label: 'Food', category: 'food', icon: <Utensils /> },
+  { href: '/', label: 'All', icon: <Home size={16} /> },
+  { href: '/', label: 'AI', category: 'ai', icon: <Bot size={16} /> },
+  { href: '/', label: 'Advertising', category: 'advertising', icon: <Megaphone size={16} /> },
+  { href: '/', label: 'Creative', category: 'creative', icon: <Brush size={16} /> },
+  { href: '/', label: 'Food', category: 'food', icon: <Utensils size={16} /> },
 ];
 
 export function Header() {
@@ -22,7 +22,7 @@ export function Header() {
                 <ActiveLink
                   href={link.href}
                   category={link.category}
-                  className="px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground rounded-full flex items-center gap-2"
+                  className="px-3 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground rounded-full flex items-center gap-1.5"
                   activeClassName="!text-foreground bg-white/10"
                 >
                   {link.icon}
