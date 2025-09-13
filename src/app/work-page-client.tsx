@@ -27,7 +27,7 @@ import {
 import { PlaceHolderVideos } from '@/lib/placeholder-videos';
 
 const formatTime = (timeInSeconds: number) => {
-  if (isNaN(timeInSeconds)) return '00:00';
+  if (isNaN(timeInSeconds) || !isFinite(timeInSeconds)) return '00:00';
   const minutes = Math.floor(timeInSeconds / 60);
   const seconds = Math.floor(timeInSeconds % 60);
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
@@ -52,8 +52,10 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
     if (!video) return;
 
     const updateProgress = () => {
-      setProgress((video.currentTime / video.duration) * 100);
-      setCurrentTime(video.currentTime);
+      if (video.duration > 0) {
+        setProgress((video.currentTime / video.duration) * 100);
+        setCurrentTime(video.currentTime);
+      }
     }
     const setVideoDuration = () => {
         if (video.duration && isFinite(video.duration)) {
@@ -103,7 +105,7 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
   }
 
   const handleProgressChange = (value: number[]) => {
-    if (videoRef.current && isFinite(duration)) {
+    if (videoRef.current && isFinite(duration) && duration > 0) {
       const newTime = (value[0] / 100) * duration;
       videoRef.current.currentTime = newTime;
       setProgress(value[0]);
@@ -137,13 +139,11 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
       const newVolume = value[0];
       videoRef.current.volume = newVolume;
       setVolume(newVolume);
-      if (newVolume > 0 && videoRef.current.muted) {
-        videoRef.current.muted = false;
-        setIsMuted(false);
-      } else if (newVolume === 0 && !videoRef.current.muted) {
-        videoRef.current.muted = true;
-        setIsMuted(true);
+      const muted = newVolume === 0;
+      if (videoRef.current.muted !== muted) {
+        videoRef.current.muted = muted;
       }
+      setIsMuted(muted);
     }
   };
 
@@ -151,18 +151,16 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
     e.preventDefault();
     e.stopPropagation();
     if (videoRef.current) {
-      const newMuted = !videoRef.current.muted;
+      const newMuted = !isMuted;
       videoRef.current.muted = newMuted;
       setIsMuted(newMuted);
       if (newMuted) {
-          setVolume(videoRef.current.volume);
+        setVolume(videoRef.current.volume);
       } else {
         if (videoRef.current.volume === 0) {
             const defaultVolume = 1;
             videoRef.current.volume = defaultVolume;
             setVolume(defaultVolume);
-        } else {
-           setVolume(videoRef.current.volume);
         }
       }
     }
@@ -213,7 +211,7 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
                                 onValueChange={handleVolumeChange}
                                 max={1}
                                 step={0.05}
-                                className="w-24 h-full hidden group-hover/volume:block"
+                                className="w-24 h-full"
                             />
                         </div>
                     </div>

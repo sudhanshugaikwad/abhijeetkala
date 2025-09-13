@@ -2,11 +2,11 @@
 export const PlaceHolderVideos = [
   {
     id: "1",
-    videoTitle: "Modern Facade",
+    videoTitle: "KFC",
     client: "Archinnect",
     category: "Creative",
     description: "Monochrome shot of a modern building facade.",
-    videoUrl: "/assets/videos/KFC.mp4",
+    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757758143/KFC_iml50l.mp4",
     imageHint: "architecture monochrome"
   },
   {
@@ -15,7 +15,7 @@ export const PlaceHolderVideos = [
     client: "Photon",
     category: "Advertising",
     description: "Abstract light trails in a dark environment.",
-    videoUrl: "/assets/videos/ForBiggerBlazes.mp4",
+    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757759509/Starbucks_o4bxtl.mp4",
     imageHint: "light trails"
   },
   {
@@ -24,25 +24,17 @@ export const PlaceHolderVideos = [
     client: "Minima",
     category: "Creative",
     description: "Minimalist interior with a single chair.",
-    videoUrl: "/assets/videos/ForBiggerEscapes.mp4",
+    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757759084/Creative_czejbz.mp4",
     imageHint: "minimalist interior"
   },
-  {
-    id: "4",
-    videoTitle: "Brutalism",
-    client: "Rocksteady",
-    category: "Creative",
-    description: "Close-up of a textured concrete wall.",
-    videoUrl: "/assets/videos/ForBiggerFun.mp4",
-    imageHint: "concrete texture"
-  },
+ 
   {
     id: "5",
     videoTitle: "Forest Spirit",
     client: "Natura",
     category: "AI",
     description: "A foggy forest scene in the early morning.",
-    videoUrl: "/assets/videos/ForBiggerJoyrides.mp4",
+    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757759509/Starbucks_o4bxtl.mp4",
     imageHint: "foggy forest"
   },
   {
@@ -51,7 +43,7 @@ export const PlaceHolderVideos = [
     client: "UrbanBuild",
     category: "Advertising",
     description: "Geometric patterns of a skyscraper.",
-    videoUrl: "/assets/videos/ForBiggerMeltdowns.mp4",
+    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757759344/Advertising_lf3hg3.mp4",
     imageHint: "skyscraper pattern"
   },
   {
@@ -60,52 +52,7 @@ export const PlaceHolderVideos = [
     client: "MetroCorp",
     category: "Food",
     description: "An empty subway station with fluorescent lighting.",
-    videoUrl: "/assets/videos/Sintel.mp4",
+    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757759237/PEPSI_ai_hzxydz.mp4",
     imageHint: "subway station"
   },
-  {
-    id: "8",
-    videoTitle: "Daydream",
-    client: "Solitude",
-    category: "Creative",
-    description: "Silhouette of a person against a bright window.",
-    videoUrl: "/assets/videos/SubaruOutbackOnStreetAndDirt.mp4",
-    imageHint: "silhouette window"
-  },
-  {
-    id: "9",
-    videoTitle: "The Long Road",
-    client: "Nomad",
-    category: "Advertising",
-    description: "Winding road through a desert landscape.",
-    videoUrl: "/assets/videos/KDC.mp4",
-    imageHint: "desert road"
-  },
-  {
-    id: "10",
-    videoTitle: "Neon Noir",
-    client: "CyberDyne",
-    category: "AI",
-    description: "Reflections on a rain-soaked city street at night.",
-    videoUrl: "/assets/videos/WeAreGoingOnAnAdventure.mp4",
-    imageHint: "rainy city"
-  },
-  {
-    id: "11",
-    videoTitle: "Serenity",
-    client: "Aqua",
-    category: "Food",
-    description: "A solitary boat on a calm lake.",
-    videoUrl: "/assets/videos/WhatCarCanYouGetForAGrand.mp4",
-    imageHint: "calm lake"
-  },
-  {
-    id: "12",
-    videoTitle: "Dune",
-    client: "Arrakis",
-    category: "AI",
-    description: "Shadows casting long lines on a sand dune.",
-    videoUrl: "/assets/videos/BigBuckBunny.mp4",
-    imageHint: "sand dune"
-  }
 ];
