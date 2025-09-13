@@ -3,10 +3,20 @@
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { WorkPageClient } from './work-page-client';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useState, useMemo } from 'react';
 
 export default function WorkPage() {
-  const allItems = PlaceHolderImages;
+  const searchParams = useSearchParams();
+  const category = searchParams.get('category');
+
+  const allItems = useMemo(() => {
+    if (category && category !== 'all') {
+      return PlaceHolderImages.filter((item) => item.category.toLowerCase() === category);
+    }
+    return PlaceHolderImages;
+  }, [category]);
+  
   const [visibleItems, setVisibleItems] = useState(4);
 
   const showMoreItems = () => {

@@ -7,7 +7,7 @@
       "category": "Creative",
       "description": "Monochrome shot of a modern building facade.",
       "imageUrl": "https://picsum.photos/seed/work1/800/1200",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "videoUrl": "/videos/ForBiggerFun.mp4",
       "imageHint": "architecture monochrome"
     },
     {
@@ -17,7 +17,7 @@
       "category": "Advertising",
       "description": "Abstract light trails in a dark environment.",
       "imageUrl": "https://picsum.photos/seed/work2/1200/800",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "videoUrl": "/videos/ForBiggerBlazes.mp4",
       "imageHint": "light trails"
     },
     {
@@ -27,7 +27,7 @@
       "category": "Creative",
       "description": "Minimalist interior with a single chair.",
       "imageUrl": "https://picsum.photos/seed/work3/800/1000",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "videoUrl": "/videos/ForBiggerEscapes.mp4",
       "imageHint": "minimalist interior"
     },
     {
@@ -37,7 +37,7 @@
       "category": "Creative",
       "description": "Close-up of a textured concrete wall.",
       "imageUrl": "https://picsum.photos/seed/work4/1200/900",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "videoUrl": "/videos/ForBiggerFun.mp4",
       "imageHint": "concrete texture"
     },
     {
@@ -47,7 +47,7 @@
       "category": "AI",
       "description": "A foggy forest scene in the early morning.",
       "imageUrl": "https://picsum.photos/seed/work5/800/1200",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+      "videoUrl": "/videos/ForBiggerJoyrides.mp4",
       "imageHint": "foggy forest"
     },
     {
@@ -57,7 +57,7 @@
       "category": "Advertising",
       "description": "Geometric patterns of a skyscraper.",
       "imageUrl": "https://picsum.photos/seed/work6/900/1200",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+      "videoUrl": "/videos/ForBiggerMeltdowns.mp4",
       "imageHint": "skyscraper pattern"
     },
     {
@@ -67,7 +67,7 @@
       "category": "Food",
       "description": "An empty subway station with fluorescent lighting.",
       "imageUrl": "https://picsum.photos/seed/work7/1600/900",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+      "videoUrl": "/videos/Sintel.mp4",
       "imageHint": "subway station"
     },
     {
@@ -77,7 +77,7 @@
       "category": "Creative",
       "description": "Silhouette of a person against a bright window.",
       "imageUrl": "https://picsum.photos/seed/work8/800/1100",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
+      "videoUrl": "/videos/SubaruOutbackOnStreetAndDirt.mp4",
       "imageHint": "silhouette window"
     },
     {
@@ -87,7 +87,7 @@
       "category": "Advertising",
       "description": "Winding road through a desert landscape.",
       "imageUrl": "https://picsum.photos/seed/work9/1200/800",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+      "videoUrl": "/videos/TearsOfSteel.mp4",
       "imageHint": "desert road"
     },
     {
@@ -97,7 +97,7 @@
       "category": "AI",
       "description": "Reflections on a rain-soaked city street at night.",
       "imageUrl": "https://picsum.photos/seed/work10/900/1100",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnAnAdventure.mp4",
+      "videoUrl": "/videos/WeAreGoingOnAnAdventure.mp4",
       "imageHint": "rainy city"
     },
     {
@@ -107,7 +107,7 @@
       "category": "Food",
       "description": "A solitary boat on a calm lake.",
       "imageUrl": "https://picsum.photos/seed/work11/1500/1000",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
+      "videoUrl": "/videos/WhatCarCanYouGetForAGrand.mp4",
       "imageHint": "calm lake"
     },
     {
@@ -117,7 +117,7 @@
       "category": "AI",
       "description": "Shadows casting long lines on a sand dune.",
       "imageUrl": "https://picsum.photos/seed/work12/800/1200",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "videoUrl": "/videos/BigBuckBunny.mp4",
       "imageHint": "sand dune"
     },
     {
@@ -127,7 +127,7 @@
       "category": "Creative",
       "description": "A spiral staircase viewed from below.",
       "imageUrl": "https://picsum.photos/seed/work13/900/1300",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "videoUrl": "/videos/ForBiggerBlazes.mp4",
       "imageHint": "spiral staircase"
     },
     {
@@ -137,7 +137,7 @@
       "category": "Food",
       "description": "Industrial machinery in a derelict factory.",
       "imageUrl": "https://picsum.photos/seed/work14/1200/850",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "videoUrl": "/videos/ForBiggerEscapes.mp4",
       "imageHint": "industrial factory"
     },
     {
@@ -147,7 +147,7 @@
       "category": "Advertising",
       "description": "Close-up detail of a classic car's headlight.",
       "imageUrl": "https://picsum.photos/seed/work15/1000/1000",
-      "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "videoUrl": "/videos/ForBiggerFun.mp4",
       "imageHint": "classic car"
     }
   ]
