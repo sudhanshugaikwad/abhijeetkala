@@ -21,7 +21,7 @@ export function Header() {
                   href={link.href}
                   category={link.category}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground pb-2"
-                  activeClassName="!text-foreground font-semibold border-b-2 border-current"
+                  activeClassName="!text-foreground font-semibold border-b-2 border-foreground"
                 >
                   {link.label}
                 </ActiveLink>
