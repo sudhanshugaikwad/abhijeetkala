@@ -4,9 +4,9 @@ import { PlaceHolderVideos } from '@/lib/placeholder-videos';
 import { WorkPageClient } from './work-page-client';
 import { Button } from '@/components/ui/button';
 import { useSearchParams } from 'next/navigation';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 
-export default function WorkPage() {
+function WorkPageContent() {
   const searchParams = useSearchParams();
   const category = searchParams.get('category');
 
@@ -36,5 +36,13 @@ export default function WorkPage() {
         </div>
       )}
     </>
+  );
+}
+
+export default function WorkPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <WorkPageContent />
+    </Suspense>
   );
 }
