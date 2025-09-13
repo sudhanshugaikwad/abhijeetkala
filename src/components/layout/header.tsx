@@ -1,12 +1,14 @@
 'use client';
 import { ActiveLink } from './active-link';
+import { Sparkles, BrainCircuit, Megaphone, Paintbrush, Utensils } from 'lucide-react';
+import type { ComponentType } from 'react';
 
-const navLinks = [
-  { href: '/', label: 'All' },
-  { href: '/', label: 'AI', category: 'ai' },
-  { href: '/', label: 'Advertising', category: 'advertising' },
-  { href: '/', label: 'Creative', category: 'creative' },
-  { href: '/', label: 'Food', category: 'food' },
+const navLinks: { href: string; label: string; category?: string; icon: ComponentType<{ className?: string }> }[] = [
+  { href: '/', label: 'All', icon: Sparkles },
+  { href: '/', label: 'AI', category: 'ai', icon: BrainCircuit },
+  { href: '/', label: 'Advertising', category: 'advertising', icon: Megaphone },
+  { href: '/', label: 'Creative', category: 'creative', icon: Paintbrush },
+  { href: '/', label: 'Food', category: 'food', icon: Utensils },
 ];
 
 export function Header() {
@@ -20,10 +22,11 @@ export function Header() {
                 <ActiveLink
                   href={link.href}
                   category={link.category}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground pb-2"
+                  className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground pb-2"
                   activeClassName="!text-foreground font-semibold border-b-2 border-foreground"
                 >
-                  {link.label}
+                  <link.icon className="size-4" />
+                  <span>{link.label}</span>
                 </ActiveLink>
               </li>
             ))}
