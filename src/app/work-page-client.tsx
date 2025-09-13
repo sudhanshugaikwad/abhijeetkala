@@ -13,15 +13,6 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-} from '@/components/ui/dropdown-menu';
 import type { PlaceHolderVideos } from '@/lib/placeholder-videos';
 
 const formatTime = (timeInSeconds: number) => {
@@ -37,20 +28,19 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
   const animationControls = useAnimation();
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const [isMuted, setIsMuted] = useState(true);
+  const [currentTime, setCurrentTime] = useState(0);
+
   useEffect(() => {
     if (isInView) {
       animationControls.start('visible');
     }
   }, [isInView, animationControls]);
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [playbackRate, setPlaybackRate] = useState('1');
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [volume, setVolume] = useState(1);
-  const [isMuted, setIsMuted] = useState(true);
-  const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -76,13 +66,16 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
     const handleFullscreenChange = () => setIsFullscreen(!!document.fullscreenElement);
     document.addEventListener('fullscreenchange', handleFullscreenChange);
 
+    // Set initial muted state on client
+    video.muted = isMuted;
+
     return () => {
       video.removeEventListener('timeupdate', updateProgress);
       video.removeEventListener('loadedmetadata', setVideoDuration);
       video.removeEventListener('durationchange', setVideoDuration);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
-  }, []);
+  }, [isInView, animationControls, isMuted]);
 
   const togglePlay = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -115,13 +108,6 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
       const newTime = (value[0] / 100) * duration;
       videoRef.current.currentTime = newTime;
       setProgress(value[0]);
-    }
-  };
-
-  const handlePlaybackRateChange = (rate: string) => {
-    setPlaybackRate(rate);
-    if (videoRef.current) {
-      videoRef.current.playbackRate = Number(rate);
     }
   };
 
@@ -187,7 +173,6 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
         <video
           ref={videoRef}
           src={item.videoUrl}
-          muted={isMuted}
           loop
           playsInline
           onClick={handleVideoClick}
@@ -257,7 +242,7 @@ export function WorkPageClient({ items }: { items: (typeof PlaceHolderVideos) })
   return (
     <div className="container mx-auto max-w-3xl">
       <div className="space-y-16">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <VideoItem key={item.id} item={item} />
         ))}
       </div>
