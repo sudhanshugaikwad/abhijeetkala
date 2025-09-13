@@ -37,14 +37,13 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isControlsVisible, setIsControlsVisible] = useState(false);
   
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [playbackRate, setPlaybackRate] = useState('1');
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [volume, setVolume] = useState(0); // Muted by default
-  const [isMuted, setIsMuted] = useState(true);
+  const [volume, setVolume] = useState(1);
+  const [isMuted, setIsMuted] = useState(true); // Muted by default
   
   useEffect(() => {
     setVideoRef(videoRef.current, index);
@@ -75,18 +74,6 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
   }, []);
-
-  const handleMouseEnter = () => {
-    setIsControlsVisible(true);
-    videoRef.current?.play();
-    setIsPlaying(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsControlsVisible(false);
-    videoRef.current?.pause();
-    setIsPlaying(false);
-  };
 
   const togglePlay = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -136,12 +123,12 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
       const newVolume = value[0];
       videoRef.current.volume = newVolume;
       setVolume(newVolume);
-      if (newVolume > 0 && isMuted) {
-        setIsMuted(false);
+      if (newVolume > 0 && videoRef.current.muted) {
         videoRef.current.muted = false;
-      } else if (newVolume === 0 && !isMuted) {
-        setIsMuted(true);
+        setIsMuted(false);
+      } else if (newVolume === 0 && !videoRef.current.muted) {
         videoRef.current.muted = true;
+        setIsMuted(true);
       }
     }
   };
@@ -154,14 +141,15 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
       videoRef.current.muted = newMuted;
       setIsMuted(newMuted);
       if (newMuted) {
-        setVolume(0);
+          setVolume(0);
       } else {
         // If unmuting and volume was 0, set to a default volume
         if (videoRef.current.volume === 0) {
-          videoRef.current.volume = 1;
-          setVolume(1);
+            const defaultVolume = 1;
+            videoRef.current.volume = defaultVolume;
+            setVolume(defaultVolume);
         } else {
-          setVolume(videoRef.current.volume);
+           setVolume(videoRef.current.volume);
         }
       }
     }
@@ -174,9 +162,7 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
         <h2 className="text-lg font-medium mb-4 text-foreground/80">{item.title}</h2>
         <div 
           ref={containerRef}
-          className="relative aspect-video overflow-hidden rounded-lg border border-border/20 hover:border-border/60 transition-colors duration-300"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          className="relative aspect-video overflow-hidden rounded-lg border border-border/20"
         >
           <Link href={`/work/${item.id}`} className="block w-full h-full">
             <video
@@ -185,10 +171,10 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
                 muted
                 loop
                 playsInline
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-full object-cover"
             />
           </Link>
-          <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${isControlsVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="absolute inset-0 bg-black/40">
             <div className="absolute bottom-0 left-0 right-0 p-3 flex flex-col gap-2 text-white">
                 <div className="flex items-center gap-2">
                     <span className="text-xs font-mono">{formatTime(videoRef.current?.currentTime ?? 0)}</span>
@@ -258,13 +244,8 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
 }
 
 export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
-  const [visibleItems, setVisibleItems] = useState(4);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  const showMoreItems = () => {
-    setVisibleItems((prev) => prev + 4);
-  };
-  
   const setVideoRef = (el: HTMLVideoElement | null, index: number) => {
     videoRefs.current[index] = el;
   }
@@ -272,17 +253,10 @@ export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
   return (
     <div className="container mx-auto max-w-3xl">
         <div className="space-y-16">
-            {items.slice(0, visibleItems).map((item, index) => (
+            {items.map((item, index) => (
               <VideoItem key={item.id} item={item} index={index} setVideoRef={setVideoRef} />
             ))}
         </div>
-        {visibleItems < items.length && (
-            <div className="mt-16 text-center">
-            <Button variant="link" className="text-muted-foreground hover:text-foreground" onClick={showMoreItems}>
-                See more
-            </Button>
-            </div>
-        )}
     </div>
   );
 }
