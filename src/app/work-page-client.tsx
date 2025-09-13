@@ -174,7 +174,7 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
         <h2 className="text-lg font-medium mb-4 text-foreground/80">{item.title}</h2>
         <div 
           ref={containerRef}
-          className="relative aspect-video overflow-hidden rounded-lg border border-neutral-700/60 hover:border-neutral-500 transition-colors duration-300"
+          className="relative aspect-video overflow-hidden rounded-lg border border-border/20 hover:border-border/60 transition-colors duration-300"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -227,7 +227,7 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
                                     <Settings size={20} />
                                 </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent onClick={(e) => e.stopPropagation()} className="bg-black/80 border-gray-700 text-white w-40">
+                            <DropdownMenuContent onClick={(e) => e.stopPropagation()} className="bg-background/80 border-border text-foreground w-40">
                                 <DropdownMenuLabel>Playback Speed</DropdownMenuLabel>
                                 <DropdownMenuRadioGroup value={playbackRate} onValueChange={handlePlaybackRateChange}>
                                     <DropdownMenuRadioItem value="0.5">0.5x</DropdownMenuRadioItem>
@@ -235,7 +235,7 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
                                     <DropdownMenuRadioItem value="1.5">1.5x</DropdownMenuRadioItem>
                                     <DropdownMenuRadioItem value="2">2x</DropdownMenuRadioItem>
                                 </DropdownMenuRadioGroup>
-                                <DropdownMenuSeparator className="bg-gray-700" />
+                                <DropdownMenuSeparator className="bg-border" />
                                 <DropdownMenuLabel>Quality</DropdownMenuLabel>
                                 <DropdownMenuRadioGroup value="auto">
                                     <DropdownMenuRadioItem value="1080p">1080p</DropdownMenuRadioItem>
@@ -258,11 +258,11 @@ function VideoItem({ item, index, setVideoRef }: { item: ImagePlaceholder, index
 }
 
 export function WorkPageClient({ items }: { items: ImagePlaceholder[] }) {
-  const [visibleItems, setVisibleItems] = useState(3);
+  const [visibleItems, setVisibleItems] = useState(4);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const showMoreItems = () => {
-    setVisibleItems((prev) => prev + 3);
+    setVisibleItems((prev) => prev + 4);
   };
   
   const setVideoRef = (el: HTMLVideoElement | null, index: number) => {

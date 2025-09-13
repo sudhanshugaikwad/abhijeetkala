@@ -70,8 +70,8 @@ function VideoItem({ item }: { item: ImagePlaceholder }) {
                 )}
           </div>
           <div className="mt-2">
-              <h3 className="font-semibold text-white">{item.title}</h3>
-              <p className="text-sm text-neutral-400">{item.client}</p>
+              <h3 className="font-semibold text-foreground">{item.title}</h3>
+              <p className="text-sm text-muted-foreground">{item.client}</p>
           </div>
       </Link>
   );
