@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/header';
 import { cn } from '@/lib/utils';
 import { Suspense } from 'react';
+import { Footer } from '@/components/layout/footer';
 
 export const metadata: Metadata = {
   title: 'Portfolio',
@@ -28,11 +29,9 @@ export default function RootLayout({
           <main className="flex-grow w-full px-4 sm:px-6 lg:px-8 py-8">
             {children}
           </main>
-          <footer className="w-full py-6 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center text-sm text-muted-foreground border-t border-border/40 pt-6">
-              <p>&copy; {new Date().getFullYear()} Abhijeet Kala. All Rights Reserved.</p>
-            </div>
-          </footer>
+          <Suspense>
+            <Footer />
+          </Suspense>
         </div>
         <Toaster />
       </body>
