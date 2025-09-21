@@ -48,10 +48,10 @@ export function BackToTopButton() {
             variant="default"
             size="icon"
             className={cn(
-              'rounded-full shadow-lg h-12 w-12 bg-primary/90 hover:bg-primary'
+              'rounded-full shadow-lg bg-primary/90 hover:bg-primary'
             )}
           >
-            <ArrowUp className="h-6 w-6" />
+            <ArrowUp className="h-5 w-5" />
             <span className="sr-only">Go to top</span>
           </Button>
         </motion.div>
