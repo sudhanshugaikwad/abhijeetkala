@@ -39,11 +39,11 @@
     --sidebar-ring: 0 0% 76%;
   }
   .dark {
-    --background: 0 0% 13%;
+    --background: 0 0% 13.7%;
     --foreground: 300 7% 97%;
-    --card: 0 0% 15%;
+    --card: 0 0% 13.7%;
     --card-foreground: 300 7% 97%;
-    --popover: 0 0% 15%;
+    --popover: 0 0% 13.7%;
     --popover-foreground: 300 7% 97%;
     --primary: 300 7% 97%;
     --primary-foreground: 0 0% 13%;
@@ -80,6 +80,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-size: 18px;
   }
   .dark body {
     background-color: hsl(var(--background));

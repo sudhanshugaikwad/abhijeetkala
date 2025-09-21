@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['var(--font-roboto)', 'sans-serif'],
-        headline: ['var(--font-roboto)', 'sans-serif'],
+        body: ['TildaSans', 'Arial', 'sans-serif'],
+        headline: ['TildaSans', 'Arial', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
