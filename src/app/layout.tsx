@@ -5,11 +5,12 @@ import { Header } from '@/components/layout/header';
 import { cn } from '@/lib/utils';
 import { Suspense } from 'react';
 import { Footer } from '@/components/layout/footer';
-import { Inter } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 
-const inter = Inter({
+const roboto = Roboto({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-roboto',
+  weight: ['400', '500', '700'],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={cn('font-body antialiased bg-background text-foreground', inter.variable)}>
+      <body className={cn('font-body antialiased bg-background text-foreground', roboto.variable)}>
         <Header />
         <div className="flex flex-col min-h-screen">
           <main className="flex-grow w-full px-4 sm:px-6 lg:px-8 py-8">
