@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { Suspense } from 'react';
 import { Footer } from '@/components/layout/footer';
 import { Roboto } from 'next/font/google';
+import { BackToTopButton } from '@/components/layout/back-to-top-button';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -36,6 +37,7 @@ export default function RootLayout({
           </Suspense>
         </div>
         <Toaster />
+        <BackToTopButton />
       </body>
     </html>
   );
