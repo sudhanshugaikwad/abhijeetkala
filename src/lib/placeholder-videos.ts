@@ -48,11 +48,11 @@ export const PlaceHolderVideos = [
   },
   {
     id: "7",
-    videoTitle: "Night Shift",
+    videoTitle: "Delicious Bites",
     client: "MetroCorp",
     category: "Food",
-    description: "An empty subway station with fluorescent lighting.",
-    videoUrl: "https://vimeo.com/1120791114",
-    imageHint: "subway station"
+    description: "Close-up shots of delicious food being prepared.",
+    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757759453/Food_tjv6ot.mp4",
+    imageHint: "food preparation"
   },
 ];
