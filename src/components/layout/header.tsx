@@ -15,7 +15,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full py-4">
       <div className="flex items-center justify-center px-4 sm:px-6 lg:px-8">
-        <nav className="border border-border/80 rounded-full p-1 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full max-w-md sm:w-auto sm:max-w-none">
+        <nav className="border border-[#e5e5e5] rounded-full p-1 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full max-w-md sm:w-auto sm:max-w-none">
           <ul className="flex items-center justify-start sm:justify-center space-x-1 overflow-x-auto sm:overflow-x-visible pb-2 sm:pb-0">
             {navLinks.map((link) => (
               <li key={link.label} className="flex-shrink-0">
