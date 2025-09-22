@@ -52,7 +52,7 @@ export const PlaceHolderVideos = [
     client: "MetroCorp",
     category: "Food",
     description: "An empty subway station with fluorescent lighting.",
-    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757759237/PEPSI_ai_hzxydz.mp4",
+    videoUrl: "https://vimeo.com/1120791114",
     imageHint: "subway station"
   },
 ];
