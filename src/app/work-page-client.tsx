@@ -167,7 +167,9 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
       animate={animationControls}
       className="group"
     >
-      <h2 className="text-lg font-light mb-4 text-center text-white">{item.videoTitle}</h2>
+      <h2 className="text-lg font-light mb-4 text-center text-white">
+        {item.videoTitle}
+      </h2>
       <div className="relative aspect-video overflow-hidden rounded-lg border border-border/20">
         <video
           ref={videoRef}
