@@ -178,7 +178,7 @@ function VideoItem({ item }: { item: (typeof PlaceHolderVideos)[0] }) {
           onClick={handleVideoClick}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/40">
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="absolute bottom-0 left-0 right-0 p-3 flex flex-col gap-2 text-white">
             <div className="flex items-center gap-2">
               <span className="text-xs font-mono">{formatTime(currentTime)}</span>

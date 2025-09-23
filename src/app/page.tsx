@@ -11,7 +11,7 @@ function WorkPageContent() {
 
   const allItems = useMemo(() => {
     if (category && category !== 'all') {
-      return PlaceHolderVideos.filter((item) => item.category.toLowerCase() === category);
+      return PlaceHolderVideos.filter((item) => item.category.toLowerCase() === category.toLowerCase());
     }
     return PlaceHolderVideos;
   }, [category]);

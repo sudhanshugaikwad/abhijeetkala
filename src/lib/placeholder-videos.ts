@@ -27,7 +27,6 @@ export const PlaceHolderVideos = [
     videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757759084/Creative_czejbz.mp4",
     imageHint: "minimalist interior"
   },
- 
   {
     id: "5",
     videoTitle: "Forest Spirit",
@@ -52,7 +51,17 @@ export const PlaceHolderVideos = [
     client: "MetroCorp",
     category: "Food",
     description: "Close-up shots of delicious food being prepared.",
-    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757759453/Food_tjv6ot.mp4",
+    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1757759237/PEPSI_ai_hzxydz.mp4",
+    imageHint: "food preparation"
+  },
+  {
+    id: "8",
+    videoTitle: "Pure Line - Lakomka TVC 15",
+    client: "MetroCorp",
+    category: "Food",
+    description: "Close-up shots of delicious food being prepared.",
+    videoUrl: "https://res.cloudinary.com/sudhanshugaikwad/video/upload/v1758540307/Food_vjoref.mp4",
     imageHint: "food preparation"
   },
 ];
+
