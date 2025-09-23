@@ -21,4 +21,4 @@ This project is a Next.js-based web application built to showcase Abhijeet Kala'
 
 ---
 
-This project was bootstrapped in Firebase Studio.
+
