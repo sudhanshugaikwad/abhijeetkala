@@ -1,5 +1,5 @@
 import { Separator } from '@/components/ui/separator';
-import { journalEntries } from '@/lib/data';
+import { journalEntries } from '@/lib/placeholder-videos';
 
 export default function JournalPage() {
   return (

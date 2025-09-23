@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import { info } from '@/lib/data';
+import { info } from '@/lib/placeholder-videos';
 
 export default function InfoPage() {
   return (
