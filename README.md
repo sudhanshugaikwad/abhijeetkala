@@ -10,7 +10,7 @@ This project is a Next.js-based web application built to showcase Abhijeet Kala'
 
 ## Key Features
 
--   **Dynamic Video Showcase:** A gallery of professional video projects with custom player controls.
+-   **Dynamic Video Showcase:** A gallery of professional video projects with custom player controls and category filters.
 -   **Responsive Design:** Optimized for seamless viewing on desktops, tablets, and mobile devices.
 -   **Modern Tech Stack:** Built with Next.js, React, Tailwind CSS, and ShadCN UI for a performant and maintainable codebase.
 
@@ -20,5 +20,3 @@ This project is a Next.js-based web application built to showcase Abhijeet Kala'
 -   **Designed and Developed by:** Sudhanshu Gaikwad
 
 ---
-
-
