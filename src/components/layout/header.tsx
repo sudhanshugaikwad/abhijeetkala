@@ -14,7 +14,7 @@ const navLinks: { href: string; label: string; category?: string, icon: ReactNod
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full py-4">
-      <div className="container flex items-center justify-center px-4">
+      <div className="container flex items-center justify-center px-4 max-w-full overflow-x-auto">
         <nav className="border border-[#e5e5e5]/30 rounded-full p-1 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <ul className="flex items-center space-x-1">
             {navLinks.map((link) => (
