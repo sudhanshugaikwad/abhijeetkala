@@ -8,7 +8,7 @@ import { Footer } from '@/components/layout/footer';
 import { BackToTopButton } from '@/components/layout/back-to-top-button';
 
 export const metadata: Metadata = {
-  title: 'Portfolio',
+  title: 'Abhijeet Kala',
   description: 'Portfolio of a creative professional',
 };
 
