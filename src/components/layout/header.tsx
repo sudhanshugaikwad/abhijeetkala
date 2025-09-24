@@ -17,7 +17,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full py-4">
       <div className="container flex flex-col items-center justify-center gap-4 px-4 max-w-full overflow-x-auto">
-        <Button asChild variant="outline" size="sm" className="rounded-full bg-transparent border-white/20 text-white/80 hover:bg-white/10 hover:text-white px-4">
+        <Button asChild variant="outline" size="sm" className="rounded-full border-white/20 text-white/80 hover:bg-white/10 hover:text-white px-4 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <Link href="https://t.me/your_telegram_username" target="_blank" rel="noopener noreferrer">
             Connect on Telegram
           </Link>
