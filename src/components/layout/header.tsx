@@ -15,31 +15,35 @@ const navLinks: { href: string; label: string; category?: string, icon: ReactNod
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full py-4">
-      <div className="container flex flex-col items-center justify-center gap-4 px-4 max-w-full overflow-x-auto">
+    <>
+      <div className="container flex justify-center pt-4">
         <Button asChild variant="outline" size="sm" className="rounded-full border-white/20 text-white/80 hover:bg-white/10 hover:text-white px-4 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <Link href="https://t.me/your_telegram_username" target="_blank" rel="noopener noreferrer">
             Connect on Telegram
           </Link>
         </Button>
-        <nav className="border border-white/20 rounded-full p-1 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <ul className="flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <li key={link.label} className="flex-shrink-0">
-                <ActiveLink
-                  href={link.href}
-                  category={link.category}
-                  className="px-3 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground rounded-full flex items-center gap-1.5"
-                  activeClassName="!text-foreground bg-white/10"
-                >
-                  {link.icon}
-                  <span className="hidden sm:inline">{link.label}</span>
-                </ActiveLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
-    </header>
+      <header className="sticky top-0 z-50 w-full py-4">
+        <div className="container flex items-center justify-center px-4 max-w-full overflow-x-auto">
+          <nav className="border border-white/20 rounded-full p-1 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            <ul className="flex items-center space-x-1">
+              {navLinks.map((link) => (
+                <li key={link.label} className="flex-shrink-0">
+                  <ActiveLink
+                    href={link.href}
+                    category={link.category}
+                    className="px-3 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground rounded-full flex items-center gap-1.5"
+                    activeClassName="!text-foreground bg-white/10"
+                  >
+                    {link.icon}
+                    <span className="hidden sm:inline">{link.label}</span>
+                  </ActiveLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </header>
+    </>
   );
 }
