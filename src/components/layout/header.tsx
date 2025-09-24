@@ -18,7 +18,7 @@ export function Header() {
     <>
       <div className="container flex justify-center pt-4">
         <Button asChild variant="outline" size="sm" className="rounded-full border-white/20 text-white/80 hover:bg-white/10 hover:text-white px-4 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <Link href="https://t.me/your_telegram_username" target="_blank" rel="noopener noreferrer">
+          <Link href="https://t.me/kaltureai" target="_blank" rel="noopener noreferrer">
             Connect on Telegram
           </Link>
         </Button>
