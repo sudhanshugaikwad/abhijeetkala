@@ -2,6 +2,8 @@
 import { ActiveLink } from './active-link';
 import type { ReactNode } from 'react';
 import { Home, Bot, Megaphone, Brush, Utensils } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const navLinks: { href: string; label: string; category?: string, icon: ReactNode }[] = [
   { href: '/', label: 'All', icon: <Home size={16} /> },
@@ -14,7 +16,12 @@ const navLinks: { href: string; label: string; category?: string, icon: ReactNod
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full py-4">
-      <div className="container flex items-center justify-center px-4 max-w-full overflow-x-auto">
+      <div className="container flex flex-col items-center justify-center gap-4 px-4 max-w-full overflow-x-auto">
+        <Button asChild className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-6">
+          <Link href="https://t.me/your_telegram_username" target="_blank" rel="noopener noreferrer">
+            Connect on Telegram
+          </Link>
+        </Button>
         <nav className="border border-white/20 rounded-full p-1 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <ul className="flex items-center space-x-1">
             {navLinks.map((link) => (
